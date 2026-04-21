@@ -26,7 +26,7 @@ export function CookieConsent() {
           </div>
           <div className="flex gap-3">
             <button
-              className="h-10 rounded-xl border border-black/15 bg-white px-4 text-xs font-semibold text-black hover:bg-black/5"
+              className="h-10 rounded-xl border border-black/15 bg-white px-4 text-xs font-semibold text-black transition-colors hover:bg-black/5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black focus-visible:ring-offset-2"
               onClick={() => {
                 window.localStorage.setItem(storageKey, 'rejected');
                 setValue('rejected');
@@ -35,7 +35,7 @@ export function CookieConsent() {
               Rejeitar
             </button>
             <button
-              className="h-10 rounded-xl bg-black px-4 text-xs font-semibold text-white hover:bg-black/90"
+              className="h-10 rounded-xl bg-black px-4 text-xs font-semibold text-white transition-colors hover:bg-black/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black focus-visible:ring-offset-2"
               onClick={() => {
                 window.localStorage.setItem(storageKey, 'accepted');
                 setValue('accepted');

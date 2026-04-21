@@ -37,7 +37,10 @@ export function SiteHeader() {
           <NavLink
             to="/"
             className={({ isActive }) =>
-              cn('transition-colors hover:text-black/55', isActive ? 'text-black' : 'text-black/65')
+              cn(
+                'inline-flex items-center py-2 transition-colors hover:text-black/55',
+                isActive ? 'text-black' : 'text-black/65',
+              )
             }
           >
             Início
@@ -46,7 +49,7 @@ export function SiteHeader() {
             <a
               key={link.href}
               href={link.href}
-              className="transition-colors hover:text-black/55 text-black/65"
+              className="inline-flex items-center py-2 text-black/65 transition-colors hover:text-black/55"
             >
               {link.label}
             </a>
@@ -91,7 +94,7 @@ export function SiteHeader() {
               <a
                 key={link.href}
                 href={link.href}
-                className="py-1 text-black/65 transition-colors hover:text-black"
+                className="py-2 text-black/65 transition-colors hover:text-black"
                 onClick={() => setMenuOpen(false)}
               >
                 {link.label}
