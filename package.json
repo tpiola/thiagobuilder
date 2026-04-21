@@ -4,7 +4,7 @@
   "packageManager": "pnpm@9.15.0",
   "scripts": {
     "dev": "turbo run dev --parallel",
-    "build": "turbo run build && node tools/vercel-static-copy.mjs",
+    "build": "turbo run build",
     "lint": "turbo run lint",
     "check": "turbo run check",
     "test": "turbo run test",

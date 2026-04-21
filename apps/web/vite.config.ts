@@ -6,6 +6,8 @@ import { traeBadgePlugin } from 'vite-plugin-trae-solo-badge';
 // https://vite.dev/config/
 export default defineConfig(({ mode }) => ({
   build: {
+    outDir: '../../public',
+    emptyOutDir: true,
     sourcemap: 'hidden',
     rollupOptions: {
       output: {
