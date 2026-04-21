@@ -1,4 +1,4 @@
-import { lazy, Suspense, useEffect } from 'react';
+import { useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { LeadForm } from '@/components/LeadForm';
 import { applySeo } from '@/lib/seo';
