@@ -228,7 +228,7 @@ export function LeadForm({ source }: { source: LeadSource }) {
               ? 'Enviando…'
               : 'Quero meu diagnóstico grátis'}
         </Button>
-        <p className="text-[11px] text-black/50">
+        <p className="text-[11px] text-black/60">
           Sem spam. Cancele a qualquer momento.
         </p>
       </div>

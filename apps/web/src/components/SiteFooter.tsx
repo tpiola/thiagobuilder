@@ -23,7 +23,7 @@ export function SiteFooter() {
           {/* Navigation */}
           <div className="grid grid-cols-2 gap-8 text-xs md:col-span-2">
             <div>
-              <p className="font-semibold uppercase tracking-[0.16em] text-black/50">Legal</p>
+              <p className="font-semibold uppercase tracking-[0.16em] text-black/60">Legal</p>
               <nav className="mt-4 flex flex-col gap-3" aria-label="Links legais">
                 <Link className="text-black/65 transition-colors hover:text-black" to="/politica">
                   Política de privacidade
@@ -35,7 +35,7 @@ export function SiteFooter() {
             </div>
 
             <div>
-              <p className="font-semibold uppercase tracking-[0.16em] text-black/50">Contato</p>
+              <p className="font-semibold uppercase tracking-[0.16em] text-black/60">Contato</p>
               <nav className="mt-4 flex flex-col gap-3" aria-label="Links de contato">
                 <a
                   className="text-black/65 transition-colors hover:text-black"
@@ -54,7 +54,7 @@ export function SiteFooter() {
           </div>
         </div>
 
-        <div className="mt-12 flex flex-col gap-2 border-t border-black/8 pt-8 text-[11px] text-black/45 sm:flex-row sm:items-center sm:justify-between">
+        <div className="mt-12 flex flex-col gap-2 border-t border-black/8 pt-8 text-[11px] text-black/60 sm:flex-row sm:items-center sm:justify-between">
           <span>© {YEAR} Piola Builder. Todos os direitos reservados.</span>
           <span>Feito com IA e automação para negócios que crescem.</span>
         </div>

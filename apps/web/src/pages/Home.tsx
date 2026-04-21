@@ -44,7 +44,7 @@ function MapSection() {
     <section id="mapa" aria-labelledby="mapa-heading" className="border-t border-black/10 bg-white">
       <div className="mx-auto grid max-w-6xl gap-10 px-6 py-20 md:grid-cols-2 md:items-start">
         <div>
-          <p className="text-xs font-semibold uppercase tracking-[0.16em] text-black/50">Localização</p>
+          <p className="text-xs font-semibold uppercase tracking-[0.16em] text-black/60">Localização</p>
           <h2 id="mapa-heading" className="mt-3 text-2xl font-semibold tracking-tight">
             Abra no GPS e venha nos visitar
           </h2>
@@ -62,7 +62,7 @@ function MapSection() {
               Abrir no Google Maps
             </a>
           </div>
-          <p className="mt-5 text-xs text-black/50">
+          <p className="mt-5 text-xs text-black/60">
             {address} — {city}
           </p>
         </div>
@@ -175,7 +175,7 @@ export default function Home() {
         className="border-t border-black/10 bg-[#fafafa]"
       >
         <div className="mx-auto max-w-6xl px-6 py-20">
-          <p className="text-xs font-semibold uppercase tracking-[0.16em] text-black/50">
+          <p className="text-xs font-semibold uppercase tracking-[0.16em] text-black/60">
             Resultados
           </p>
           <h2
@@ -208,7 +208,7 @@ export default function Home() {
         className="border-t border-black/10 bg-white"
       >
         <div className="mx-auto max-w-6xl px-6 py-20">
-          <p className="text-xs font-semibold uppercase tracking-[0.16em] text-black/50">
+          <p className="text-xs font-semibold uppercase tracking-[0.16em] text-black/60">
             Depoimentos
           </p>
           <h2
@@ -229,7 +229,7 @@ export default function Home() {
                 </blockquote>
                 <figcaption className="mt-5 border-t border-black/8 pt-4">
                   <p className="text-xs font-semibold text-black">{t.author}</p>
-                  <p className="mt-0.5 text-[11px] text-black/50">{t.role}</p>
+                  <p className="mt-0.5 text-[11px] text-black/60">{t.role}</p>
                 </figcaption>
               </figure>
             ))}

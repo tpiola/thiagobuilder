@@ -13,7 +13,7 @@ export default function Termos() {
 
   return (
     <main className="mx-auto max-w-3xl px-6 py-16 md:py-24">
-      <nav className="mb-8 text-xs text-black/50" aria-label="Breadcrumb">
+      <nav className="mb-8 text-xs text-black/60" aria-label="Breadcrumb">
         <Link to="/" className="hover:text-black transition-colors">Início</Link>
         <span className="mx-2">›</span>
         <span>Termos de Uso</span>
@@ -23,7 +23,7 @@ export default function Termos() {
         Termos de Uso
       </h1>
 
-      <p className="mt-2 text-xs text-black/45">Última atualização: abril de 2026</p>
+      <p className="mt-2 text-xs text-black/60">Última atualização: abril de 2026</p>
 
       <div className="mt-8 space-y-8 text-sm leading-relaxed text-black/70">
         <div className="rounded-2xl border border-amber-200 bg-amber-50 px-5 py-4 text-xs text-amber-800">
