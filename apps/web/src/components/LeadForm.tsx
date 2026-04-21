@@ -9,14 +9,15 @@ const Schema = z.object({
   name: z.string().trim().min(2).max(80).optional().or(z.literal('')),
   email: z.string().trim().min(3).max(160),
   phone: z.string().trim().min(8).max(40).optional().or(z.literal('')),
-  company: z.string().trim().min(2).max(80).optional().or(z.literal('')),
   city: z.string().trim().min(2).max(80).optional().or(z.literal('')),
   consent: z.boolean(),
 });
 
 type FormValues = z.infer<typeof Schema>;
 
-async function submitLead(payload: LeadPayload): Promise<{ ok: true } | { ok: false; error: string }> {
+async function submitLead(
+  payload: LeadPayload,
+): Promise<{ ok: true } | { ok: false; error: string }> {
   if (import.meta.env.DEV) {
     const key = 'piola:dev-leads';
     const raw = window.localStorage.getItem(key);
@@ -41,7 +42,10 @@ async function submitLead(payload: LeadPayload): Promise<{ ok: true } | { ok: fa
     if (r.ok) return { ok: true };
     const data: unknown = await r.json().catch(() => null);
     const error =
-      typeof data === 'object' && data !== null && 'error' in data && typeof (data as { error?: unknown }).error === 'string'
+      typeof data === 'object' &&
+      data !== null &&
+      'error' in data &&
+      typeof (data as { error?: unknown }).error === 'string'
         ? String((data as { error?: unknown }).error)
         : 'submit_failed';
     return { ok: false, error };
@@ -62,14 +66,11 @@ export function LeadForm({ source }: { source: LeadSource }) {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<FormValues>({
-    defaultValues: { consent: false },
-    mode: 'onBlur',
-  });
+  } = useForm<FormValues>({ defaultValues: { consent: false }, mode: 'onBlur' });
 
   return (
     <form
-      className="rounded-3xl border border-black/10 bg-white p-6 shadow-lg shadow-black/5 md:p-8"
+      className="rounded-2xl border border-black/10 bg-white p-6 shadow-lg shadow-black/5 md:p-8"
       onSubmit={handleSubmit(async (values) => {
         setError(null);
         setStatus('sending');
@@ -80,7 +81,6 @@ export function LeadForm({ source }: { source: LeadSource }) {
           setError('Confira os campos e tente novamente.');
           return;
         }
-
         if (!isEmail(parsed.data.email)) {
           setStatus('error');
           setError('E-mail inválido.');
@@ -91,7 +91,6 @@ export function LeadForm({ source }: { source: LeadSource }) {
           email: parsed.data.email,
           name: parsed.data.name || undefined,
           phone: parsed.data.phone || undefined,
-          company: parsed.data.company || undefined,
           city: parsed.data.city || undefined,
           consent: parsed.data.consent,
           source,
@@ -109,50 +108,78 @@ export function LeadForm({ source }: { source: LeadSource }) {
       })}
       aria-describedby={error ? 'lead-error' : undefined}
     >
-      <div className="flex items-start justify-between gap-6">
-        <div>
-          <h2 className="text-xl font-semibold tracking-tight">Diagnóstico gratuito (2 minutos)</h2>
-          <p className="mt-2 text-sm leading-relaxed text-black/70">
-            Você recebe um plano de ação com 3 alavancas de conversão e um roteiro de automação para o seu negócio local.
-          </p>
-        </div>
-        <div className="hidden rounded-2xl bg-black px-3 py-2 text-[10px] font-semibold uppercase tracking-[0.18em] text-white/80 md:block">
-          Variante {variant}
-        </div>
+      <div>
+        <h2 className="text-xl font-semibold tracking-tight">
+          Diagnóstico gratuito (2 minutos)
+        </h2>
+        <p className="mt-2 text-sm leading-relaxed text-black/65">
+          Você recebe um plano de ação com 3 alavancas de conversão e um roteiro de
+          automação personalizado para o seu negócio local.
+        </p>
       </div>
 
       <div className="mt-6 grid grid-cols-1 gap-4 md:grid-cols-2">
         <div>
-          <label className="text-xs font-semibold text-black/70" htmlFor="name">
+          <label className="text-xs font-semibold text-black/65" htmlFor="name">
             Nome
           </label>
           <div className="mt-2">
-            <Input id="name" autoComplete="name" placeholder="Seu nome" {...register('name')} />
+            <Input
+              id="name"
+              autoComplete="name"
+              placeholder="Seu nome"
+              {...register('name')}
+            />
           </div>
         </div>
+
         <div>
-          <label className="text-xs font-semibold text-black/70" htmlFor="email">
-            E-mail
+          <label className="text-xs font-semibold text-black/65" htmlFor="email">
+            E-mail <span className="text-red-600" aria-hidden="true">*</span>
           </label>
           <div className="mt-2">
-            <Input id="email" autoComplete="email" placeholder="voce@empresa.com" {...register('email', { required: true })} />
+            <Input
+              id="email"
+              type="email"
+              autoComplete="email"
+              placeholder="voce@empresa.com"
+              aria-required="true"
+              {...register('email', { required: true })}
+            />
           </div>
-          {errors.email && <div className="mt-1 text-xs text-red-700">Informe um e-mail.</div>}
+          {errors.email && (
+            <p className="mt-1 text-xs text-red-700" role="alert">
+              Informe um e-mail válido.
+            </p>
+          )}
         </div>
+
         <div>
-          <label className="text-xs font-semibold text-black/70" htmlFor="phone">
+          <label className="text-xs font-semibold text-black/65" htmlFor="phone">
             WhatsApp
           </label>
           <div className="mt-2">
-            <Input id="phone" autoComplete="tel" placeholder="(DDD) 99999-9999" {...register('phone')} />
+            <Input
+              id="phone"
+              type="tel"
+              autoComplete="tel"
+              placeholder="(DDD) 99999-9999"
+              {...register('phone')}
+            />
           </div>
         </div>
+
         <div>
-          <label className="text-xs font-semibold text-black/70" htmlFor="city">
+          <label className="text-xs font-semibold text-black/65" htmlFor="city">
             Cidade
           </label>
           <div className="mt-2">
-            <Input id="city" autoComplete="address-level2" placeholder="Ex.: Curitiba" {...register('city')} />
+            <Input
+              id="city"
+              autoComplete="address-level2"
+              placeholder="Ex.: Curitiba"
+              {...register('city')}
+            />
           </div>
         </div>
       </div>
@@ -161,30 +188,50 @@ export function LeadForm({ source }: { source: LeadSource }) {
         <input
           id="consent"
           type="checkbox"
-          className="mt-1 h-4 w-4 rounded border-black/20"
+          className="mt-1 h-4 w-4 rounded border-black/20 accent-black focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black focus-visible:ring-offset-2"
+          aria-required="true"
           {...register('consent', { required: true })}
         />
-        <label className="text-xs leading-relaxed text-black/70" htmlFor="consent">
-          Eu concordo em receber contato e entendo a política de privacidade.
+        <label className="text-xs leading-relaxed text-black/65" htmlFor="consent">
+          Eu concordo em receber contato sobre diagnóstico e proposta, conforme a{' '}
+          <a href="/politica" className="underline hover:text-black">
+            política de privacidade
+          </a>
+          .
         </label>
       </div>
-      {errors.consent && <div className="mt-1 text-xs text-red-700">Confirme o consentimento.</div>}
+      {errors.consent && (
+        <p className="mt-1 text-xs text-red-700" role="alert">
+          Confirme o consentimento para continuar.
+        </p>
+      )}
 
       {error && (
-        <div id="lead-error" className="mt-4 rounded-2xl border border-red-200 bg-red-50 px-4 py-3 text-xs text-red-800">
+        <div
+          id="lead-error"
+          role="alert"
+          className="mt-4 rounded-2xl border border-red-200 bg-red-50 px-4 py-3 text-xs text-red-800"
+        >
           {error}
         </div>
       )}
 
       <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-        <Button type="submit" disabled={status === 'sending' || status === 'sent'} className="w-full sm:w-auto">
-          {status === 'sent' ? 'Enviado — confira seu e-mail' : status === 'sending' ? 'Enviando…' : 'Quero meu diagnóstico'}
+        <Button
+          type="submit"
+          disabled={status === 'sending' || status === 'sent'}
+          className="w-full sm:w-auto"
+        >
+          {status === 'sent'
+            ? '✓ Enviado — confira seu e-mail'
+            : status === 'sending'
+              ? 'Enviando…'
+              : 'Quero meu diagnóstico grátis'}
         </Button>
-        <div className="text-[11px] text-black/60">
-          Sem spam. Você pode pedir remoção a qualquer momento.
-        </div>
+        <p className="text-[11px] text-black/50">
+          Sem spam. Cancele a qualquer momento.
+        </p>
       </div>
     </form>
   );
 }
-
