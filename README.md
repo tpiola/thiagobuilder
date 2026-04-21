@@ -27,6 +27,13 @@ pnpm install
 pnpm dev
 ```
 
+Rodar individualmente:
+
+- Web: `pnpm --filter web dev`
+- Admin: `pnpm --filter admin dev`
+- Docs (app): `pnpm --filter docs dev`
+- Storybook: `pnpm --filter docs storybook`
+
 ## Build
 
 ```bash
@@ -40,6 +47,23 @@ pnpm test
 pnpm e2e
 pnpm a11y
 ```
+
+## Qualidade (checklist)
+
+- Conversão: CTAs visíveis + formulário no hero (`apps/web/src/components/LeadForm.tsx`)
+- SEO base: `lang=pt-BR`, `meta description`, OG e canonical via runtime
+- A11y: foco visível, labels, Axe em e2e (`apps/web/e2e/a11y.spec.ts`)
+- Performance: build Vite + assets minificados; evitar libs pesadas na home
+
+## Branches (recomendado)
+
+- `main`: produção
+- `develop`: integração
+- `feat/*`, `fix/*`: branches curtas para PR
+
+## GitHub (primeiro push)
+
+Se o repositório remoto ainda não existir, crie-o no GitHub antes de adicionar o `origin`.
 
 ## Variáveis de ambiente (produção)
 
@@ -62,3 +86,5 @@ Este repositório está pronto para deploy no Vercel.
 - `apps/admin` como projeto “Admin”
 
 Cada app pode ser conectado separadamente no Vercel, apontando o Root Directory para `apps/web` ou `apps/admin`.
+
+Opcional: `apps/docs` pode ser publicado como Storybook (saída de `build-storybook`).
