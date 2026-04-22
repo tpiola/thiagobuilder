@@ -14,6 +14,7 @@ export default function Connect() {
       title: 'Conecte-se — ALTIQ',
       description: 'Entre para salvar templates, acompanhar propostas e continuar o builder.',
       canonicalPath: '/conecte-se',
+      robots: 'noindex,nofollow',
     });
   }, []);
 
@@ -42,7 +43,7 @@ export default function Connect() {
             <div className="mx-auto grid h-10 w-10 place-items-center rounded-full border border-black/10">
               <span className="text-[11px] font-black tracking-[0.18em]">A</span>
             </div>
-            <h1 className="mt-6 text-2xl font-semibold tracking-tight md:text-3xl">Faça login na ALTIQ.</h1>
+            <h1 className="mt-6 text-2xl font-semibold tracking-tight md:text-3xl">Acesso à conta</h1>
           </div>
 
           <div className="mt-12 grid gap-12 md:grid-cols-12 md:items-start">
@@ -121,7 +122,7 @@ export default function Connect() {
                   className="inline-flex h-12 items-center justify-center gap-3 rounded-xl border border-black/15 bg-white px-6 text-sm font-semibold text-black/80 transition-colors hover:bg-black/5"
                 >
                   <span className="text-base"></span>
-                  Continue com a Apple
+                  Continuar com a Apple
                 </button>
                 <button
                   type="button"
@@ -145,4 +146,3 @@ export default function Connect() {
     </main>
   );
 }
-

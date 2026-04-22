@@ -5,7 +5,7 @@ import { LeadForm } from '@/components/LeadForm';
 export default function Contato() {
   useEffect(() => {
     applySeo({
-      title: 'Conecte-se — ALTIQ',
+      title: 'Contato — ALTIQ',
       description: 'Entre em contato e receba proposta e próximos passos.',
       canonicalPath: '/contato',
     });
@@ -20,7 +20,7 @@ export default function Contato() {
           </p>
           <h1 className="mt-3 text-3xl font-semibold tracking-tight md:text-4xl">Conecte-se com a ALTIQ</h1>
           <p className="mt-4 max-w-2xl text-sm leading-relaxed text-black/65">
-            Se você quer executar com padrão premium, descreva seu nicho e o objetivo. Você recebe proposta e entra nas automações.
+            Descreva seu nicho e objetivo. Você recebe uma proposta estruturada e um plano inicial de execução com foco em conversão e operação.
           </p>
         </div>
       </section>
@@ -32,7 +32,7 @@ export default function Contato() {
               <p className="text-xs font-semibold uppercase tracking-[0.18em] text-black/55">Como funciona</p>
               <h2 className="mt-2 text-xl font-semibold tracking-tight">Lead → webhook → automações</h2>
               <p className="mt-3 text-sm leading-relaxed text-black/65">
-                Todo clique em "ver preço" ou ações de proposta direciona para captura. A partir daí, o webhook carrega o payload para suas automações.
+                As solicitações de proposta direcionam para captura. Em seguida, o webhook encaminha o payload para automações e roteamento do lead.
               </p>
             </div>
           </div>
@@ -50,4 +50,3 @@ export default function Contato() {
     </main>
   );
 }
-

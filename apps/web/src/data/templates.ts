@@ -9,23 +9,17 @@ export type TemplateDefinition = {
   includedModuleIds: string[];
 };
 
-const img = (prompt: string, size: string) =>
-  `https://coreva-normal.trae.ai/api/ide/v1/text_to_image?prompt=${encodeURIComponent(prompt)}&image_size=${size}`;
-
 export const TEMPLATES: TemplateDefinition[] = [
   {
     slug: 'estetica-lux',
     name: 'Estética Lux',
     niche: 'Clínica de estética',
     tagline: 'Editorial minimal com conversão em 2 cliques.',
-    coverImageUrl: img(
-      'editorial premium website hero, dark green plants shelf bokeh, cinematic, shallow depth of field, soft grain, minimal typography, luxury, high-end, moody lighting',
-      'landscape_16_9',
-    ),
+    coverImageUrl: 'https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=2000&h=1125&fit=crop',
     galleryImageUrls: [
-      img('luxury skincare product photography, softbox, clean background, minimal, premium editorial, 35mm, subtle grain', 'landscape_4_3'),
-      img('modern clinic interior, warm light, minimal furniture, premium, cinematic, 35mm, subtle grain', 'landscape_4_3'),
-      img('close-up hands holding phone with booking interface, premium, cinematic, shallow depth of field', 'landscape_4_3'),
+      'https://images.unsplash.com/photo-1556228578-0d85b1a4d571?w=1600&h=1200&fit=crop',
+      'https://images.unsplash.com/photo-1582719508461-905c673771fd?w=1600&h=1200&fit=crop',
+      'https://images.unsplash.com/photo-1512290923902-8a9f81dc236c?w=1600&h=1200&fit=crop',
     ],
     basePriceCents: 490000,
     includedModuleIds: ['crm-inbox', 'analytics'],
@@ -35,14 +29,11 @@ export const TEMPLATES: TemplateDefinition[] = [
     name: 'Odonto Pro',
     niche: 'Clínica odontológica',
     tagline: 'Prova social, confiança e agenda cheia.',
-    coverImageUrl: img(
-      'premium editorial dentistry clinic hero background, soft natural light, minimal composition, high-end, cinematic, shallow depth of field, subtle grain',
-      'landscape_16_9',
-    ),
+    coverImageUrl: 'https://images.unsplash.com/photo-1606811841689-23dfddce3e95?w=2000&h=1125&fit=crop',
     galleryImageUrls: [
-      img('dental clinic minimal interior, premium, clean lines, cinematic light, subtle grain', 'landscape_4_3'),
-      img('smiling patient portrait, premium editorial, soft light, shallow depth of field, subtle grain', 'landscape_4_3'),
-      img('appointment calendar interface on laptop, premium editorial, minimal, cinematic', 'landscape_4_3'),
+      'https://images.unsplash.com/photo-1629909613654-28e377c37b09?w=1600&h=1200&fit=crop',
+      'https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=1600&h=1200&fit=crop',
+      'https://images.unsplash.com/photo-1521737604893-d14cc237f11d?w=1600&h=1200&fit=crop',
     ],
     basePriceCents: 490000,
     includedModuleIds: ['crm-inbox', 'seo'],
@@ -52,14 +43,11 @@ export const TEMPLATES: TemplateDefinition[] = [
     name: 'Personal Prime',
     niche: 'Personal trainer',
     tagline: 'Oferta clara + follow-up automático.',
-    coverImageUrl: img(
-      'premium editorial fitness hero, dark gym ambience, soft highlights, minimal typography area, cinematic, 35mm, subtle grain',
-      'landscape_16_9',
-    ),
+    coverImageUrl: 'https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=2000&h=1125&fit=crop',
     galleryImageUrls: [
-      img('fitness coaching consultation, premium editorial, warm light, minimal', 'landscape_4_3'),
-      img('mobile phone with workout plan interface, premium editorial, cinematic, shallow depth of field', 'landscape_4_3'),
-      img('close up kettlebell and towel, premium editorial still life, subtle grain', 'landscape_4_3'),
+      'https://images.unsplash.com/photo-1554284126-aa88f22d8b74?w=1600&h=1200&fit=crop',
+      'https://images.unsplash.com/photo-1521737604893-d14cc237f11d?w=1600&h=1200&fit=crop',
+      'https://images.unsplash.com/photo-1518611012118-696072aa579a?w=1600&h=1200&fit=crop',
     ],
     basePriceCents: 390000,
     includedModuleIds: ['analytics'],
@@ -71,4 +59,3 @@ export function findTemplate(slug: string | undefined): TemplateDefinition | nul
   const t = TEMPLATES.find((x) => x.slug === slug);
   return t ?? null;
 }
-

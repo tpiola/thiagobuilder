@@ -50,22 +50,31 @@ export function HeroCarousel({ slides, className, intervalMs = 7000 }: HeroCarou
 
   if (max === 0) return null;
 
+  const prev = (index - 1 + max) % max;
+  const next = (index + 1) % max;
+  const shouldRender = (i: number) => i === index || i === prev || i === next;
+
   return (
     <section className={cn('relative overflow-hidden', className)} aria-label="Carrossel">
       <div className="relative">
         <div className="relative aspect-[16/9] min-h-[320px] w-full md:aspect-[21/9] md:min-h-[520px]">
-          {safeSlides.map((s, i) => (
-            <img
-              key={s.src}
-              src={s.src}
-              alt={s.alt}
-              loading={i === index ? 'eager' : 'lazy'}
-              className={cn(
-                'absolute inset-0 h-full w-full object-cover transition-opacity duration-700',
-                i === index ? 'opacity-100' : 'opacity-0',
-              )}
-            />
-          ))}
+          {safeSlides.map((s, i) => {
+            if (!shouldRender(i)) return null;
+            return (
+              <img
+                key={s.src}
+                src={s.src}
+                alt={s.alt}
+                loading={i === index ? 'eager' : 'lazy'}
+                decoding="async"
+                fetchPriority={i === index ? 'high' : 'auto'}
+                className={cn(
+                  'absolute inset-0 h-full w-full object-cover transition-opacity duration-700',
+                  i === index ? 'opacity-100' : 'opacity-0',
+                )}
+              />
+            );
+          })}
 
           <div className="absolute inset-0 bg-gradient-to-b from-black/55 via-black/25 to-black/65" />
           <div className="absolute inset-0 bg-[radial-gradient(90%_60%_at_50%_35%,rgba(255,255,255,0.14),rgba(0,0,0,0))]" />
@@ -75,13 +84,13 @@ export function HeroCarousel({ slides, className, intervalMs = 7000 }: HeroCarou
           <div className="mx-auto max-w-6xl px-6 pt-20 md:pt-24">
             <div className="max-w-3xl">
               <p className="inline-flex rounded-full border border-white/20 bg-white/10 px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.22em] text-white/80 backdrop-blur">
-                Navegação premium e páginas individuais
+                Plataforma premium de operações digitais com IA
               </p>
               <h1 className="mt-7 text-4xl font-semibold leading-[1.05] tracking-tight text-white md:text-6xl">
-                Menu fixo + carrossel + seções separadas
+                Arquitetura para sites, funis e automações
               </h1>
               <p className="mt-6 max-w-2xl text-sm leading-relaxed text-white/80 md:text-base">
-                Estrutura pronta para trocar imagens por vídeos depois, sem quebrar o layout.
+                Estruture aquisição, conversão e follow-up com padrões de design, SEO e mensuração.
               </p>
             </div>
           </div>
@@ -131,4 +140,3 @@ export function HeroCarousel({ slides, className, intervalMs = 7000 }: HeroCarou
     </section>
   );
 }
-

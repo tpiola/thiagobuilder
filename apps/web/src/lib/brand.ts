@@ -6,6 +6,5 @@ export const BRAND = {
   heroVideoUrl:
     'https://cdn.coverr.co/videos/coverr-working-at-night-5178/1080p.mp4',
   heroPosterUrl:
-    'https://coreva-normal.trae.ai/api/ide/v1/text_to_image?prompt=editorial%20premium%20workspace%2C%20dark%20green%20plants%20bokeh%2C%20cinematic%2C%2035mm%2C%20soft%20grain%2C%20low%20contrast%2C%20moody%20lighting&image_size=landscape_16_9',
+    'https://images.unsplash.com/photo-1519710164239-da123dc03ef4?w=2000&h=1200&fit=crop',
 } as const;
-

@@ -1,23 +1,24 @@
 import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { applySeo } from '@/lib/seo';
-import { HeroCarousel } from '@/components/HeroCarousel';
+import { HeroVideo } from '@/components/HeroVideo';
 import { TemplateCard } from '@/components/TemplateCard';
 import { TEMPLATES } from '@/data/templates';
 import { LeadForm } from '@/components/LeadForm';
+import { BRAND } from '@/lib/brand';
 
 const STEPS = [
   {
-    t: '1 — Template por nicho',
-    d: 'Escolha um layout editorial premium com estrutura de conversão pronta.',
+    t: '1 — Template por segmento',
+    d: 'Selecione uma base editorial premium com estrutura de conversão pronta.',
   },
   {
-    t: '2 — Módulos do hub',
-    d: 'Adicione agendamento, automações, SEO e analytics conforme o escopo.',
+    t: '2 — Módulos operacionais',
+    d: 'Defina agendamento, automações, SEO e analytics conforme o escopo de entrega.',
   },
   {
-    t: '3 — Preço com lead',
-    d: 'Ao ver preço, você captura o lead e dispara as automações via webhook.',
+    t: '3 — Proposta e automação',
+    d: 'A captura direciona o lead e aciona automações via webhook com rastreio de origem.',
   },
 ] as const;
 
@@ -33,22 +34,37 @@ export default function Home() {
 
   return (
     <main className="bg-white">
-      <HeroCarousel
-        slides={[
-          {
-            src: 'https://coreva-normal.trae.ai/api/ide/v1/text_to_image?prompt=top%20navigation%20bar%20ui%2C%20minimal%20website%20header%2C%20high%20contrast%2C%20editorial%2C%20clean%20layout%2C%20cinematic%20lighting%2C%2035mm%2C%20soft%20film%20grain%2C%20realistic%20ui%20mockup&image_size=landscape_16_9',
-            alt: 'Menu superior fixo',
-          },
-          {
-            src: 'https://coreva-normal.trae.ai/api/ide/v1/text_to_image?prompt=website%20hero%20carousel%20banner%2C%20premium%20editorial%20layout%2C%20dark%20background%2C%20subtle%20gradient%2C%20clean%20typography%2C%20high%20end%20web%20design%2C%2035mm%2C%20soft%20grain&image_size=landscape_16_9',
-            alt: 'Carrossel no topo',
-          },
-          {
-            src: 'https://coreva-normal.trae.ai/api/ide/v1/text_to_image?prompt=responsive%20website%20layout%20on%20mobile%20tablet%20desktop%2C%20navigation%20and%20footer%20links%2C%20premium%20editorial%20design%2C%20clean%20grid%2C%20soft%20shadows%2C%20realistic%20device%20mockup&image_size=landscape_16_9',
-            alt: 'Responsivo em mobile, tablet e desktop',
-          },
-        ]}
-      />
+      <section className="relative isolate overflow-hidden bg-black" aria-labelledby="home-hero">
+        <HeroVideo src={BRAND.heroVideoUrl} poster={BRAND.heroPosterUrl} />
+        <div className="relative mx-auto max-w-6xl px-6 pb-20 pt-28 md:pb-28 md:pt-32">
+          <div className="mx-auto max-w-3xl text-center">
+            <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-white/70">
+              Arquitetura de operações digitais
+            </p>
+            <h1 id="home-hero" className="mt-6 text-4xl font-semibold tracking-tight text-white md:text-6xl">
+              Um hub torna isso real.
+            </h1>
+            <p className="mx-auto mt-6 max-w-2xl text-base leading-relaxed text-white/75">
+              Você escolhe o nicho, o template e os módulos. A ALTIQ estrutura páginas, captação e automações para transformar intenção em operação.
+            </p>
+
+            <div className="mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row">
+              <Link
+                to="/comecar"
+                className="inline-flex h-12 items-center justify-center rounded-xl bg-white px-8 text-xs font-semibold uppercase tracking-[0.18em] text-black transition-colors hover:bg-white/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-black"
+              >
+                Comece agora
+              </Link>
+              <Link
+                to="/templates"
+                className="inline-flex h-12 items-center justify-center rounded-xl border border-white/20 bg-white/5 px-8 text-xs font-semibold uppercase tracking-[0.18em] text-white transition-colors hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-black"
+              >
+                Ver templates
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
 
       <section className="border-t border-black/10 bg-white" aria-labelledby="hero-actions">
         <div className="mx-auto max-w-6xl px-6 py-10">
@@ -56,10 +72,10 @@ export default function Home() {
             <div>
               <p className="text-xs font-semibold uppercase tracking-[0.18em] text-black/55">Atalhos</p>
               <h2 id="hero-actions" className="mt-2 text-xl font-semibold tracking-tight">
-                Navegue por páginas individuais (rotas próprias)
+                Explore a plataforma por módulos e entregáveis
               </h2>
               <p className="mt-2 max-w-2xl text-sm leading-relaxed text-black/65">
-                A Home agora abre com carrossel. O menu fixo e o rodapé levam para as seções.
+                Navegue por templates, soluções e recursos. Cada página mantém linguagem formal, clareza e padrão premium.
               </p>
             </div>
             <div className="flex flex-col gap-3 sm:flex-row">
@@ -88,10 +104,10 @@ export default function Home() {
                 Templates
               </p>
               <h2 id="templates-home" className="mt-2 text-2xl font-semibold tracking-tight">
-                Escolha um template e direcione o clique de preço para lead
+                Templates por nicho, com estética editorial e execução previsível
               </h2>
               <p className="mt-3 max-w-2xl text-sm leading-relaxed text-black/65">
-                Catálogo com visual editorial premium. O botão de preço abre a página do template com captura e webhook.
+                Estrutura de páginas, SEO base e eventos do funil. Ao solicitar proposta, a captura encaminha o lead e inicia as automações.
               </p>
             </div>
             <Link
@@ -134,10 +150,10 @@ export default function Home() {
               Diagnóstico
             </p>
             <h2 id="lead-heading" className="mt-2 text-2xl font-semibold tracking-tight">
-              Quer acelerar com a ALTIQ?
+              Quer estruturar sua operação com a ALTIQ?
             </h2>
             <p className="mt-4 text-sm leading-relaxed text-black/65">
-              Se você prefere que a gente faça a arquitetura, entrega e automações, envie seus dados. O retorno vem com proposta e próximos passos.
+              Se você quer execução com padrão premium, envie seus dados. Você recebe proposta, próximos passos e um plano inicial orientado por métricas.
             </p>
           </div>
           <div className="md:col-span-6">

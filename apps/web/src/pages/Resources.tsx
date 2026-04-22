@@ -9,6 +9,7 @@ export default function Resources() {
       title: 'Recursos — ALTIQ',
       description: 'Suporte, guias e inspiração para estruturar hubs e operações digitais com IA.',
       canonicalPath: '/recursos',
+      ogImage: RESOURCES_INSPIRE.mediaUrl,
     });
   }, []);
 
@@ -16,16 +17,16 @@ export default function Resources() {
     <main className="bg-[#090D12] text-white">
       <section className="mx-auto max-w-6xl px-6 pb-14 pt-28">
         <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-white/50">Recursos</p>
-        <h1 className="mt-4 text-3xl font-semibold tracking-tight md:text-4xl">Suporte e inspiração</h1>
+        <h1 className="mt-4 text-3xl font-semibold tracking-tight md:text-4xl">Recursos e guias</h1>
         <p className="mt-4 max-w-2xl text-sm leading-relaxed text-white/70">
-          Tudo para você operar com clareza: guias, exemplos e uma trilha de execução.
+          Materiais para orientar decisões, organizar o funil e manter execução consistente.
         </p>
       </section>
 
       <section className="mx-auto max-w-6xl px-6 pb-20">
         <div className="grid gap-10 rounded-3xl border border-white/10 bg-black/70 p-8 shadow-2xl shadow-black/40 lg:grid-cols-12">
           <div className="lg:col-span-7">
-            <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-white/45">Suporte 24 horas por dia, 7 dias por semana</p>
+            <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-white/45">Base de conhecimento</p>
             <div className="mt-6 grid gap-7 md:grid-cols-2">
               {RESOURCE_ITEMS.map((item) => (
                 <Link
@@ -48,7 +49,7 @@ export default function Resources() {
               className="mt-6 block overflow-hidden rounded-2xl border border-white/10 bg-white/5 transition-colors hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-black"
             >
               <div className="relative aspect-[16/9]">
-                <img src={RESOURCES_INSPIRE.mediaUrl} alt="" className="absolute inset-0 h-full w-full object-cover" loading="lazy" />
+                <img src={RESOURCES_INSPIRE.mediaUrl} alt="" className="absolute inset-0 h-full w-full object-cover" loading="lazy" decoding="async" />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/15 to-black/20" />
               </div>
               <div className="px-6 py-5">
@@ -62,4 +63,3 @@ export default function Resources() {
     </main>
   );
 }
-

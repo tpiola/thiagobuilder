@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+Disallow: /p/
+Disallow: /conecte-se
+Disallow: /templates/preview
+
+Sitemap: https://altiq.ai/sitemap.xml
+

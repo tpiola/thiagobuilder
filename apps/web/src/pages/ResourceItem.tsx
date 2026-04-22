@@ -12,7 +12,8 @@ export default function ResourceItem() {
     applySeo({
       title: `${item.title} — Recursos ALTIQ`,
       description: item.description,
-      canonicalPath: window.location.pathname,
+      canonicalPath: `/recursos/${item.slug}`,
+      ogImage: 'https://altiq.ai/og-image.png',
     });
   }, [item]);
 
@@ -66,7 +67,7 @@ export default function ResourceItem() {
           <div className="lg:col-span-7">
             <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-white/45">Conteúdo</p>
             <p className="mt-4 max-w-2xl text-sm leading-relaxed text-white/70">
-              Esta página é individual por recurso. Aqui você pode colocar texto, imagens, ou futuramente vídeos sem mudar a navegação.
+              Este recurso foi estruturado para leitura editorial, com navegação clara e foco em decisão. O conteúdo detalhado pode ser expandido com seções, exemplos e materiais complementares.
             </p>
             <div className="mt-10 grid gap-4 sm:grid-cols-2">
               {RESOURCE_ITEMS.filter((i) => i.slug !== item.slug)
@@ -89,11 +90,12 @@ export default function ResourceItem() {
             <div className="mt-6 overflow-hidden rounded-2xl border border-white/10 bg-white/5">
               <img
                 src={
-                  'https://coreva-normal.trae.ai/api/ide/v1/text_to_image?prompt=dark%20editorial%20resource%20page%20hero%2C%20premium%20web%20design%2C%20subtle%20gradient%2C%20clean%20typography%2C%20high%20end%20ui%20mockup%2C%2035mm%2C%20soft%20grain&image_size=portrait_4_3'
+                  'https://images.unsplash.com/photo-1526481280695-3c687fd643ed?w=1200&h=900&fit=crop'
                 }
                 alt=""
                 className="h-[320px] w-full object-cover"
                 loading="lazy"
+                decoding="async"
               />
             </div>
           </div>
@@ -102,4 +104,3 @@ export default function ResourceItem() {
     </main>
   );
 }
-

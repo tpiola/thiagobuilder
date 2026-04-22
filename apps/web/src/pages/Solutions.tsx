@@ -5,7 +5,16 @@ import { SOLUTION_CATEGORIES } from '@/data/megaMenu';
 
 export default function Solutions() {
   const { slug } = useParams();
-  const [active, setActive] = useState(slug ?? SOLUTION_CATEGORIES[0]?.slug ?? 'servicos-criativos');
+  const defaultSlug = SOLUTION_CATEGORIES[0]?.slug ?? 'servicos-criativos';
+  const [active, setActive] = useState(slug ?? defaultSlug);
+
+  useEffect(() => {
+    if (!slug) {
+      setActive(defaultSlug);
+      return;
+    }
+    setActive(slug);
+  }, [defaultSlug, slug]);
 
   const category = useMemo(
     () => SOLUTION_CATEGORIES.find((c) => c.slug === active) ?? SOLUTION_CATEGORIES[0],
@@ -17,9 +26,10 @@ export default function Solutions() {
     applySeo({
       title: `${category.title} — Soluções ALTIQ`,
       description: category.description,
-      canonicalPath: `/solucoes/${category.slug}`,
+      canonicalPath: slug ? `/solucoes/${category.slug}` : '/solucoes',
+      ogImage: category.imageUrl,
     });
-  }, [category]);
+  }, [category, slug]);
 
   if (!category) return null;
 
@@ -41,6 +51,7 @@ export default function Solutions() {
                   <Link
                     to={`/solucoes/${c.slug}`}
                     onMouseEnter={() => setActive(c.slug)}
+                    onClick={() => setActive(c.slug)}
                     className={
                       c.slug === category.slug
                         ? 'text-sm font-semibold text-white'
@@ -72,7 +83,7 @@ export default function Solutions() {
 
           <div className="lg:col-span-3 lg:border-l lg:border-white/10 lg:pl-10">
             <div className="overflow-hidden rounded-2xl border border-white/10 bg-white/5">
-              <img src={category.imageUrl} alt="" className="h-[280px] w-full object-cover" loading="lazy" />
+              <img src={category.imageUrl} alt="" className="h-[280px] w-full object-cover" loading="lazy" decoding="async" />
             </div>
           </div>
         </div>
@@ -80,4 +91,3 @@ export default function Solutions() {
     </main>
   );
 }
-

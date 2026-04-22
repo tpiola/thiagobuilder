@@ -12,7 +12,7 @@ export default function MenuPage() {
     applySeo({
       title: `${page.title} — ALTIQ`,
       description: page.description,
-      canonicalPath: window.location.pathname,
+      canonicalPath: `/secao/${page.slug}`,
     });
   }, [page]);
 
@@ -71,21 +71,20 @@ export default function MenuPage() {
           <div className="grid gap-6 rounded-3xl border border-black/10 bg-white p-6 md:p-8 lg:grid-cols-12">
             <div className="lg:col-span-7">
               <p className="text-xs font-semibold uppercase tracking-[0.18em] text-black/55">Visão geral</p>
-              <h2 className="mt-3 text-2xl font-semibold tracking-tight">Uma página individual para esta seção</h2>
+              <h2 className="mt-3 text-2xl font-semibold tracking-tight">Visão executiva da seção</h2>
               <p className="mt-4 max-w-2xl text-sm leading-relaxed text-black/65">
-                Esta rota é independente e aparece tanto no menu superior quanto no rodapé. O topo da Home fica com carrossel; aqui você tem leitura focada.
+                Esta página consolida a proposta, os principais benefícios e o próximo passo recomendado, mantendo consistência visual e clareza comercial.
               </p>
             </div>
             <div className="lg:col-span-5">
               <div className="overflow-hidden rounded-2xl border border-black/10">
-                <img
-                  src={
-                    'https://coreva-normal.trae.ai/api/ide/v1/text_to_image?prompt=premium%20editorial%20website%20section%20page%2C%20clean%20typography%2C%20grid%20layout%2C%20high%20end%20web%20design%2C%20subtle%20texture%2C%20soft%20shadow%2C%20realistic%20ui%20mockup&image_size=landscape_16_9'
-                  }
-                  alt=""
-                  className="h-full w-full object-cover"
-                  loading="lazy"
-                />
+              <img
+                src={'https://images.unsplash.com/photo-1519710164239-da123dc03ef4?w=1600&h=900&fit=crop'}
+                alt=""
+                className="h-[220px] w-full object-cover"
+                loading="lazy"
+                decoding="async"
+              />
               </div>
             </div>
           </div>

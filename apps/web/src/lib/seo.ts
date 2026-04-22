@@ -2,13 +2,15 @@ type SeoInput = {
   title: string;
   description: string;
   canonicalPath?: string;
+  ogImage?: string;
+  robots?: string;
 };
 
-function setMeta(name: string, content: string) {
-  let el = document.querySelector(`meta[name="${name}"]`) as HTMLMetaElement | null;
+function setMetaBy(name: string, value: string, content: string) {
+  let el = document.querySelector(`meta[${name}="${value}"]`) as HTMLMetaElement | null;
   if (!el) {
     el = document.createElement('meta');
-    el.setAttribute('name', name);
+    el.setAttribute(name, value);
     document.head.appendChild(el);
   }
   el.setAttribute('content', content);
@@ -16,17 +18,39 @@ function setMeta(name: string, content: string) {
 
 export function applySeo(input: SeoInput) {
   document.title = input.title;
-  setMeta('description', input.description);
+  setMetaBy('name', 'description', input.description);
+
+  if (input.robots) {
+    setMetaBy('name', 'robots', input.robots);
+  }
+
+  const canonicalHref = input.canonicalPath
+    ? new URL(input.canonicalPath, window.location.origin).toString()
+    : null;
 
   if (input.canonicalPath) {
-    const href = new URL(input.canonicalPath, window.location.origin).toString();
     let el = document.querySelector('link[rel="canonical"]') as HTMLLinkElement | null;
     if (!el) {
       el = document.createElement('link');
       el.setAttribute('rel', 'canonical');
       document.head.appendChild(el);
     }
-    el.setAttribute('href', href);
+    el.setAttribute('href', canonicalHref ?? window.location.href);
   }
+
+  const url = canonicalHref ?? window.location.href;
+  const ogImage = input.ogImage ?? 'https://altiq.ai/og-image.png';
+
+  setMetaBy('property', 'og:type', 'website');
+  setMetaBy('property', 'og:site_name', 'ALTIQ');
+  setMetaBy('property', 'og:title', input.title);
+  setMetaBy('property', 'og:description', input.description);
+  setMetaBy('property', 'og:url', url);
+  setMetaBy('property', 'og:image', ogImage);
+
+  setMetaBy('name', 'twitter:card', 'summary_large_image');
+  setMetaBy('name', 'twitter:title', input.title);
+  setMetaBy('name', 'twitter:description', input.description);
+  setMetaBy('name', 'twitter:image', ogImage);
 }
 

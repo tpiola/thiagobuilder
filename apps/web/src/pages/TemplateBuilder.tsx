@@ -90,7 +90,7 @@ export default function TemplateBuilder() {
             Monte um template, selecione módulos e gere a proposta
           </h1>
           <p className="mt-4 max-w-2xl text-sm leading-relaxed text-black/65">
-            Você digita nicho e nome do template, carrega as fotos e escolhe o que o hub terá. O total aumenta conforme o escopo cresce. Ao abrir a página do template, o clique de preço já entra no fluxo de lead e automações.
+            Defina nicho, nome e direção. Selecione módulos do hub e gere um escopo inicial com valores incrementais. Ao solicitar proposta, a captura encaminha o lead e aciona automações via webhook.
           </p>
         </div>
       </section>
@@ -171,7 +171,7 @@ export default function TemplateBuilder() {
           <div className="mt-6 rounded-2xl border border-black/10 bg-black/2 p-6">
             <h3 className="text-sm font-semibold text-black">Ação</h3>
             <p className="mt-2 text-xs leading-relaxed text-black/60">
-              Ao abrir a página do template, o botão de preço vai para o lead form e dispara o webhook.
+              A solicitação de proposta direciona para captura e aciona o webhook com contexto, origem e escopo.
             </p>
             <button
               type="button"

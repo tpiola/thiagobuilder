@@ -20,6 +20,7 @@ export function TemplateCard({ template }: TemplateCardProps) {
             alt=""
             className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.04]"
             loading="lazy"
+            decoding="async"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent" />
           <div className="absolute bottom-4 left-4 right-4">
@@ -56,4 +57,3 @@ export function TemplateCard({ template }: TemplateCardProps) {
     </article>
   );
 }
-

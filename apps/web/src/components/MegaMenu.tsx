@@ -79,6 +79,7 @@ function SolutionsPanel({ onMouseLeave }: { onMouseLeave: () => void }) {
               alt=""
               className="h-[240px] w-full object-cover"
               loading="lazy"
+              decoding="async"
             />
           </div>
         </div>
@@ -95,7 +96,7 @@ function ResourcesPanel({ onMouseLeave }: { onMouseLeave: () => void }) {
     >
       <div className="grid gap-10 px-8 py-8 lg:grid-cols-12">
         <div className="lg:col-span-7">
-          <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-white/45">Suporte 24 horas por dia, 7 dias por semana</p>
+          <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-white/45">Base de conhecimento</p>
           <div className="mt-6 grid gap-7 md:grid-cols-2">
             {RESOURCE_ITEMS.map((item) => (
               <Link

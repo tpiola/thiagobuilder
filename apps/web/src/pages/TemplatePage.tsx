@@ -49,10 +49,13 @@ export default function TemplatePage() {
 
   useEffect(() => {
     if (!template) return;
+    const isPreview = template.slug === 'preview';
     applySeo({
       title: `${template.name} — Templates ALTIQ`,
       description: `${template.niche}. ${template.tagline}`,
-      canonicalPath: `/templates/${slug ?? template.slug}`,
+      canonicalPath: isPreview ? '/templates' : `/templates/${template.slug}`,
+      ogImage: template.coverImageUrl,
+      robots: isPreview ? 'noindex,nofollow' : undefined,
     });
   }, [slug, template]);
 
@@ -92,6 +95,8 @@ export default function TemplatePage() {
             alt=""
             className="h-full w-full object-cover"
             loading="eager"
+            decoding="async"
+            fetchPriority="high"
           />
           <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/30 to-black/70" />
         </div>
@@ -132,7 +137,7 @@ export default function TemplatePage() {
                 key={src}
                 className="overflow-hidden rounded-2xl border border-black/10"
               >
-                <img src={src} alt="" className="h-full w-full object-cover" loading="lazy" />
+                <img src={src} alt="" className="h-full w-full object-cover" loading="lazy" decoding="async" />
               </div>
             ))}
           </div>
@@ -197,4 +202,3 @@ export default function TemplatePage() {
     </main>
   );
 }
-

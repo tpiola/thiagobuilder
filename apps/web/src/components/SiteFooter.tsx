@@ -1,18 +1,33 @@
 import { Link } from 'react-router-dom';
-import { MEGA_MENU, findMenuPage } from '@/data/megaMenu';
+import { Facebook, Instagram, Linkedin, Twitter, Youtube } from 'lucide-react';
+import { FOOTER_GROUPS, RESOURCE_ITEMS, SOLUTION_CATEGORIES, findMenuPage } from '@/data/megaMenu';
+import { BRAND } from '@/lib/brand';
 
 const YEAR = new Date().getFullYear();
 
+function resolveFooterLink(slug: string): { to: string; title: string } | null {
+  const page = findMenuPage(slug);
+  if (page) return { to: `/p/${page.slug}`, title: page.title };
+
+  const solution = SOLUTION_CATEGORIES.find((c) => c.slug === slug);
+  if (solution) return { to: `/solucoes/${solution.slug}`, title: solution.label };
+
+  const resource = RESOURCE_ITEMS.find((r) => r.slug === slug);
+  if (resource) return { to: `/recursos/${resource.slug}`, title: resource.title };
+
+  return null;
+}
+
 function FooterSectionLinks({ slugs }: { slugs: readonly string[] }) {
   return (
-    <ul className="mt-4 flex flex-col gap-3">
+    <ul className="mt-5 grid gap-3">
       {slugs.map((slug) => {
-        const page = findMenuPage(slug);
-        if (!page) return null;
+        const link = resolveFooterLink(slug);
+        if (!link) return null;
         return (
           <li key={slug}>
-            <Link className="text-black/65 transition-colors hover:text-black" to={`/secao/${page.slug}`}>
-              {page.title}
+            <Link className="text-white/65 transition-colors hover:text-white" to={link.to}>
+              {link.title}
             </Link>
           </li>
         );
@@ -21,73 +36,115 @@ function FooterSectionLinks({ slugs }: { slugs: readonly string[] }) {
   );
 }
 
+const SOCIALS = [
+  { label: 'Instagram', Icon: Instagram, href: '#' },
+  { label: 'YouTube', Icon: Youtube, href: '#' },
+  { label: 'LinkedIn', Icon: Linkedin, href: '#' },
+  { label: 'Facebook', Icon: Facebook, href: '#' },
+  { label: 'X', Icon: Twitter, href: '#' },
+] as const;
+
 export function SiteFooter() {
   return (
-    <footer className="border-t border-black/10 bg-white">
-      <div className="mx-auto max-w-6xl px-6 py-16">
-        <div className="grid gap-12 md:grid-cols-12 md:gap-8">
-          {/* Brand */}
-          <div className="md:col-span-4">
+    <footer className="bg-[#090D12] text-white">
+      <div className="mx-auto max-w-6xl px-6 pb-10 pt-16">
+        <div className="grid gap-12 lg:grid-cols-12">
+          <div className="lg:col-span-3">
             <div className="flex items-center gap-3">
-              <div className="grid h-9 w-9 place-items-center rounded-lg bg-black text-white shrink-0">
-                <span className="text-sm font-black">P</span>
+              <div className="grid h-10 w-10 place-items-center rounded-xl border border-white/10 bg-white/5">
+                <span className="text-[11px] font-black tracking-[0.22em]">A</span>
               </div>
-              <div className="text-sm font-semibold tracking-tight">ALTIQ</div>
+              <div>
+                <div className="text-[13px] font-semibold tracking-[0.22em]">{BRAND.name}</div>
+                <div className="text-xs text-white/55">Arquitetura • Hub • Automação</div>
+              </div>
             </div>
-            <p className="mt-4 max-w-xs text-xs leading-relaxed text-black/60">
-              Funil de aquisição + autoridade local + automação. Um sistema único para transformar tráfego em agenda cheia.
+            <p className="mt-6 max-w-xs text-xs leading-relaxed text-white/60">
+              Uma plataforma para estruturar presença, captação e operação digital com execução premium.
             </p>
           </div>
 
-          {/* Navigation */}
-          <div className="grid gap-8 text-xs md:col-span-8 md:grid-cols-2 lg:grid-cols-4">
-            <div>
-              <p className="font-semibold uppercase tracking-[0.16em] text-black/60">Site</p>
-              <FooterSectionLinks slugs={MEGA_MENU.site.slugs} />
-            </div>
+          <div className="grid gap-10 text-xs sm:grid-cols-2 lg:col-span-9 lg:grid-cols-5">
+            {FOOTER_GROUPS.map((group) => (
+              <div key={group.title}>
+                <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-white/45">{group.title}</p>
+                <FooterSectionLinks slugs={group.slugs} />
+              </div>
+            ))}
 
             <div>
-              <p className="font-semibold uppercase tracking-[0.16em] text-black/60">Comércio</p>
-              <FooterSectionLinks slugs={MEGA_MENU.comercio.slugs} />
-            </div>
+              <div className="flex items-center justify-between">
+                <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-white/45">Conecte-se</p>
+              </div>
+              <ul className="mt-5 grid gap-3">
+                <li>
+                  <Link className="text-white/65 transition-colors hover:text-white" to="/conecte-se">
+                    Login
+                  </Link>
+                </li>
+                <li>
+                  <Link className="text-white/65 transition-colors hover:text-white" to="/comecar">
+                    Comece agora
+                  </Link>
+                </li>
+                <li>
+                  <Link className="text-white/65 transition-colors hover:text-white" to="/contato">
+                    Contato
+                  </Link>
+                </li>
+              </ul>
 
-            <div>
-              <p className="font-semibold uppercase tracking-[0.16em] text-black/60">Marketing</p>
-              <FooterSectionLinks slugs={MEGA_MENU.marketing.slugs} />
-            </div>
-
-            <div>
-              <p className="font-semibold uppercase tracking-[0.16em] text-black/60">Negócio</p>
-              <FooterSectionLinks slugs={MEGA_MENU.business.slugs} />
-
-              <p className="mt-8 font-semibold uppercase tracking-[0.16em] text-black/60">Mais</p>
-              <nav className="mt-4 flex flex-col gap-3" aria-label="Links do site">
-                <Link className="text-black/65 transition-colors hover:text-black" to="/solucoes">
-                  Soluções
-                </Link>
-                <Link className="text-black/65 transition-colors hover:text-black" to="/recursos">
-                  Recursos
-                </Link>
-                <Link className="text-black/65 transition-colors hover:text-black" to="/templates">
-                  Templates
-                </Link>
-                <Link className="text-black/65 transition-colors hover:text-black" to="/contato">
-                  Contato
-                </Link>
-                <Link className="text-black/65 transition-colors hover:text-black" to="/politica">
-                  Política
-                </Link>
-                <Link className="text-black/65 transition-colors hover:text-black" to="/termos">
-                  Termos
-                </Link>
-              </nav>
+              <p className="mt-10 text-[11px] font-semibold uppercase tracking-[0.22em] text-white/45">Seguir</p>
+              <div className="mt-5 flex flex-wrap gap-2">
+                {SOCIALS.map(({ href, label, Icon }) => (
+                  <a
+                    key={label}
+                    href={href}
+                    aria-label={label}
+                    className="inline-flex h-9 w-9 items-center justify-center rounded-xl border border-white/10 bg-white/5 text-white/70 transition-colors hover:bg-white/10 hover:text-white"
+                  >
+                    <Icon size={16} />
+                  </a>
+                ))}
+              </div>
             </div>
           </div>
         </div>
 
-        <div className="mt-12 flex flex-col gap-2 border-t border-black/8 pt-8 text-[11px] text-black/60 sm:flex-row sm:items-center sm:justify-between">
-          <span>© {YEAR} ALTIQ. Todos os direitos reservados.</span>
-          <span>Feito com IA e automação para negócios que crescem.</span>
+        <div className="mt-14 border-t border-white/10 pt-8">
+          <div className="flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
+            <div className="flex flex-wrap items-center gap-3 text-xs text-white/60">
+              <button type="button" className="inline-flex items-center gap-2 rounded-xl border border-white/10 bg-white/5 px-4 py-2 hover:bg-white/10">
+                Português
+              </button>
+              <button type="button" className="inline-flex items-center gap-2 rounded-xl border border-white/10 bg-white/5 px-4 py-2 hover:bg-white/10">
+                R$ BRL
+              </button>
+            </div>
+
+            <nav aria-label="Rodapé" className="flex flex-wrap justify-center gap-x-6 gap-y-2 text-xs text-white/60">
+              <Link className="hover:text-white" to="/termos">
+                Termos
+              </Link>
+              <Link className="hover:text-white" to="/politica">
+                Privacidade
+              </Link>
+              <Link className="hover:text-white" to="/p/preferencias-de-cookies">
+                Preferências de cookies
+              </Link>
+              <Link className="hover:text-white" to="/p/medidas-de-seguranca">
+                Medidas de segurança
+              </Link>
+              <Link className="hover:text-white" to="/p/mapa-do-site">
+                Mapa do site
+              </Link>
+            </nav>
+          </div>
+
+          <div className="mt-8 flex flex-col gap-2 text-[11px] text-white/55 sm:flex-row sm:items-center sm:justify-between">
+            <span>© {YEAR} {BRAND.name}. Todos os direitos reservados.</span>
+            <span className="text-white/45">{BRAND.domain}</span>
+          </div>
         </div>
       </div>
     </footer>

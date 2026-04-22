@@ -81,7 +81,7 @@ export default function Start() {
                 Voltar
               </button>
               <button type="button" className="text-black/60 hover:text-black" onClick={() => navigate('/templates')}>
-                Estou apenas navegando.
+                Ir para o catálogo
               </button>
             </div>
 
@@ -266,4 +266,3 @@ export default function Start() {
     </main>
   );
 }
-

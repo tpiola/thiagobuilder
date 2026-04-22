@@ -27,7 +27,6 @@ export default function App() {
           <Route path="/templates" element={<Templates />} />
           <Route path="/templates/:slug" element={<TemplatePage />} />
           <Route path="/builder" element={<TemplateBuilder />} />
-          <Route path="/secao/:slug" element={<MenuPage />} />
           <Route path="/p/:slug" element={<MenuPage />} />
           <Route path="/contato" element={<Contato />} />
           <Route path="/conecte-se" element={<Connect />} />
