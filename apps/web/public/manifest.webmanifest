@@ -1,0 +1,24 @@
+{
+  "name": "ALTIQ",
+  "short_name": "ALTIQ",
+  "description": "Arquitetura de operações digitais com IA: hubs, sistemas e automações com padrão premium.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0A0A0A",
+  "theme_color": "#0A0A0A",
+  "icons": [
+    {
+      "src": "/pwa-192.svg",
+      "sizes": "192x192",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "/pwa-512.svg",
+      "sizes": "512x512",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}
+
