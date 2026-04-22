@@ -84,9 +84,9 @@ function MapSection() {
 export default function Home() {
   useEffect(() => {
     applySeo({
-      title: 'Piola Builder — IA e Automação para Negócios Locais',
+      title: 'ALTHIQ — Arquitetura de Operações Digitais com IA',
       description:
-        'Sistema de aquisição e automação para negócios locais: mais leads qualificados, mais agenda cheia, menos desperdício.',
+        'Arquitetura de operações digitais com IA: hubs, sistemas e automações para lançar, captar, vender e escalar com execução premium.',
       canonicalPath: '/',
     });
   }, []);

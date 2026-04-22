@@ -3,7 +3,7 @@ import { useEffect, useMemo, useState } from 'react';
 type Consent = 'accepted' | 'rejected';
 
 export function CookieConsent() {
-  const storageKey = 'piola:cookie-consent';
+  const storageKey = 'althiq:cookie-consent';
   const [value, setValue] = useState<Consent | null>(null);
 
   useEffect(() => {

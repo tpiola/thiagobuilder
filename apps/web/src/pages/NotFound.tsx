@@ -5,7 +5,7 @@ import { applySeo } from '@/lib/seo';
 export default function NotFound() {
   useEffect(() => {
     applySeo({
-      title: 'Página não encontrada — Piola Builder',
+      title: 'Página não encontrada — ALTHIQ',
       description: 'A página que você procura não existe. Volte para a home.',
       canonicalPath: '/404',
     });

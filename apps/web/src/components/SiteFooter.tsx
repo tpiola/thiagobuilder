@@ -13,7 +13,7 @@ export function SiteFooter() {
               <div className="grid h-9 w-9 place-items-center rounded-lg bg-black text-white shrink-0">
                 <span className="text-sm font-black">P</span>
               </div>
-              <div className="text-sm font-semibold tracking-tight">Piola Builder</div>
+              <div className="text-sm font-semibold tracking-tight">ALTHIQ</div>
             </div>
             <p className="mt-4 max-w-xs text-xs leading-relaxed text-black/60">
               Funil de aquisição + autoridade local + automação. Um sistema único para transformar tráfego em agenda cheia.
@@ -39,9 +39,9 @@ export function SiteFooter() {
               <nav className="mt-4 flex flex-col gap-3" aria-label="Links de contato">
                 <a
                   className="text-black/65 transition-colors hover:text-black"
-                  href="mailto:contato@piolabuilder.com"
+                  href="mailto:hello@althiq.com"
                 >
-                  contato@piolabuilder.com
+                  hello@althiq.com
                 </a>
                 <a
                   className="text-black/65 transition-colors hover:text-black"
@@ -55,7 +55,7 @@ export function SiteFooter() {
         </div>
 
         <div className="mt-12 flex flex-col gap-2 border-t border-black/8 pt-8 text-[11px] text-black/60 sm:flex-row sm:items-center sm:justify-between">
-          <span>© {YEAR} Piola Builder. Todos os direitos reservados.</span>
+          <span>© {YEAR} ALTHIQ. Todos os direitos reservados.</span>
           <span>Feito com IA e automação para negócios que crescem.</span>
         </div>
       </div>

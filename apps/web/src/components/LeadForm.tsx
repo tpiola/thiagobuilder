@@ -1,9 +1,9 @@
 import { useMemo, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
-import type { LeadPayload, LeadSource } from '@piola/types';
-import { assignAbVariant, getOrCreateVisitorId, isEmail, pickUtm } from '@piola/utils';
-import { Button, Input } from '@piola/ui';
+import type { LeadPayload, LeadSource } from '@althiq/types';
+import { assignAbVariant, getOrCreateVisitorId, isEmail, pickUtm } from '@althiq/utils';
+import { Button, Input } from '@althiq/ui';
 
 const Schema = z.object({
   name: z.string().trim().min(2).max(80).optional().or(z.literal('')),
@@ -19,7 +19,7 @@ async function submitLead(
   payload: LeadPayload,
 ): Promise<{ ok: true } | { ok: false; error: string }> {
   if (import.meta.env.DEV) {
-    const key = 'piola:dev-leads';
+    const key = 'althiq:dev-leads';
     const raw = window.localStorage.getItem(key);
     let list: unknown[] = [];
     try {

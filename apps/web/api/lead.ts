@@ -71,7 +71,7 @@ export default async function handler(req: unknown, res: unknown) {
   const headers: Record<string, string> = {
     'Content-Type': 'application/json',
   };
-  if (secret) headers['X-Piola-Webhook-Secret'] = secret;
+  if (secret) headers['X-Althiq-Webhook-Secret'] = secret;
 
   const r = await fetch(webhookUrl, {
     method: 'POST',

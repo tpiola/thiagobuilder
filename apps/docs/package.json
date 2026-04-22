@@ -14,7 +14,7 @@
     "test": "vitest run"
   },
   "dependencies": {
-    "@piola/ui": "workspace:*",
+    "@althiq/ui": "workspace:*",
     "clsx": "^2.1.1",
     "framer-motion": "^10.18.0",
     "lucide-react": "^0.511.0",

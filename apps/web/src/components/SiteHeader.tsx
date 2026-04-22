@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Link, NavLink } from 'react-router-dom';
-import { cn } from '@piola/ui';
+import { cn } from '@althiq/ui';
 import { Menu, X } from 'lucide-react';
 
 const NAV_LINKS = [
@@ -22,7 +22,7 @@ export function SiteHeader() {
             <span className="text-sm font-black">P</span>
           </div>
           <div className="leading-tight">
-            <div className="text-sm font-semibold tracking-tight">Piola Builder</div>
+            <div className="text-sm font-semibold tracking-tight">ALTHIQ</div>
             <div className="text-[10px] font-medium uppercase tracking-[0.18em] text-black/55">
               IA para negócios locais
             </div>

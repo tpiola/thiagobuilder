@@ -1,5 +1,5 @@
 {
-  "name": "@piola/utils",
+  "name": "@althiq/utils",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -10,7 +10,7 @@
     "check": "tsc -p tsconfig.json --noEmit"
   },
   "dependencies": {
-    "@piola/types": "workspace:*"
+    "@althiq/types": "workspace:*"
   },
   "devDependencies": {
     "typescript": "~5.8.3",

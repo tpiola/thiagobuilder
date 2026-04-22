@@ -1,4 +1,4 @@
-import type { AbVariant } from '@piola/types';
+import type { AbVariant } from '@althiq/types';
 
 export function isEmail(value: string): boolean {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value.trim());
@@ -9,7 +9,7 @@ export function clamp(n: number, min: number, max: number): number {
 }
 
 export function getOrCreateVisitorId(storage: Storage): string {
-  const key = 'piola:vid';
+  const key = 'althiq:vid';
   const existing = storage.getItem(key);
   if (existing) return existing;
   const id = `v_${Math.random().toString(16).slice(2)}_${Date.now().toString(16)}`;
