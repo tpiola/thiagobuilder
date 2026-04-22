@@ -4,6 +4,7 @@ import { applySeo } from '@/lib/seo';
 import { quoteTemplate } from '@/utils/pricing';
 import { TEMPLATE_MODULES } from '@/data/templateModules';
 import { TEMPLATES } from '@/data/templates';
+import { LeadCaptureSection } from '@/components/LeadCaptureSection';
 
 type StepId = 'topic' | 'format' | 'style' | 'modules' | 'proposal';
 
@@ -71,10 +72,14 @@ export default function Start() {
   };
 
   return (
-    <main className="min-h-[calc(100vh-4rem)] bg-white">
-      <div className="grid min-h-[calc(100vh-4rem)] grid-cols-1 lg:grid-cols-12">
-        <section className="lg:col-span-7">
-          <div className="mx-auto max-w-3xl px-6 pt-24">
+    <>
+      <main className="min-h-[calc(100vh-4rem)] bg-white">
+        <div className="grid min-h-[calc(100vh-4rem)] grid-cols-1 lg:grid-cols-12">
+          <section className="lg:col-span-7">
+            <div className="mx-auto max-w-3xl px-6 pt-24">
+            <h1 className="text-sm font-semibold uppercase tracking-[0.18em] text-black/55">
+              Comece agora
+            </h1>
             <div className="flex items-center justify-between text-xs">
               <button type="button" onClick={back} className="inline-flex items-center gap-2 text-black/60 hover:text-black" disabled={step === 'topic'}>
                 <span aria-hidden="true">←</span>
@@ -88,7 +93,7 @@ export default function Start() {
             <div className="mt-14">
               {step === 'topic' && (
                 <>
-                  <h1 className="text-3xl font-semibold tracking-tight md:text-4xl">Sobre o que é o seu site?</h1>
+                  <h2 className="text-3xl font-semibold tracking-tight md:text-4xl">Sobre o que é o seu site?</h2>
                   <p className="mt-4 max-w-xl text-sm leading-relaxed text-black/60">
                     Iremos adaptar conteúdo, recomendações e proposta ao seu mercado. Comece pelo nicho.
                   </p>
@@ -108,7 +113,7 @@ export default function Start() {
 
               {step === 'format' && (
                 <>
-                  <h1 className="text-3xl font-semibold tracking-tight md:text-4xl">Qual o formato ideal?</h1>
+                  <h2 className="text-3xl font-semibold tracking-tight md:text-4xl">Qual o formato ideal?</h2>
                   <p className="mt-4 max-w-xl text-sm leading-relaxed text-black/60">
                     Isso define arquitetura, páginas e a camada de automações.
                   </p>
@@ -133,7 +138,7 @@ export default function Start() {
 
               {step === 'style' && (
                 <>
-                  <h1 className="text-3xl font-semibold tracking-tight md:text-4xl">Qual direção de design?</h1>
+                  <h2 className="text-3xl font-semibold tracking-tight md:text-4xl">Qual direção de design?</h2>
                   <p className="mt-4 max-w-xl text-sm leading-relaxed text-black/60">
                     Ajustamos tipografia, grid, ritmo editorial e motion.
                   </p>
@@ -158,7 +163,7 @@ export default function Start() {
 
               {step === 'modules' && (
                 <>
-                  <h1 className="text-3xl font-semibold tracking-tight md:text-4xl">O que o hub precisa ter?</h1>
+                  <h2 className="text-3xl font-semibold tracking-tight md:text-4xl">O que o hub precisa ter?</h2>
                   <p className="mt-4 max-w-xl text-sm leading-relaxed text-black/60">
                     Selecione módulos. O valor aumenta conforme o escopo cresce.
                   </p>
@@ -198,7 +203,7 @@ export default function Start() {
 
               {step === 'proposal' && (
                 <>
-                  <h1 className="text-3xl font-semibold tracking-tight md:text-4xl">Proposta inicial</h1>
+                  <h2 className="text-3xl font-semibold tracking-tight md:text-4xl">Proposta inicial</h2>
                   <p className="mt-4 max-w-xl text-sm leading-relaxed text-black/60">
                     Use isso como base. Ao clicar para ver preço, você é direcionado ao template com captura de lead.
                   </p>
@@ -258,11 +263,21 @@ export default function Start() {
           </div>
         </section>
 
-        <aside className="relative hidden lg:col-span-5 lg:block">
-          <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1545239351-1141bd82e8a6?w=1600&h=1600&fit=crop')] bg-cover bg-center" />
-          <div className="absolute inset-0 bg-gradient-to-b from-white/0 via-white/0 to-white/10" />
-        </aside>
-      </div>
-    </main>
+          <aside className="relative hidden lg:col-span-5 lg:block" aria-hidden="true">
+            <div className="absolute inset-0 bg-black" />
+            <div className="absolute inset-0 bg-[radial-gradient(80%_60%_at_55%_35%,rgba(0,0,0,0.0),rgba(0,0,0,0.75))]" />
+            <div className="absolute inset-0 opacity-90" style={{ backgroundImage: "url('/hero-slide-1.svg')", backgroundSize: 'cover', backgroundPosition: 'center' }} />
+          </aside>
+        </div>
+      </main>
+
+      <LeadCaptureSection
+        id="diagnostico"
+        source="footer"
+        headline="Quer validar a rota antes de executar?"
+        description="Solicite diagnóstico estratégico. A ALTIQ confirma arquitetura, páginas, automações e mensuração com base no seu objetivo e estágio atual."
+        intent="start"
+      />
+    </>
   );
 }

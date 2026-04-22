@@ -68,11 +68,27 @@ pnpm a11y
 - `LEAD_WEBHOOK_URL`: URL do webhook da automação (Make/Zapier/CRM)
 - `LEAD_WEBHOOK_SECRET` (opcional): segredo para assinar a requisição
 
+### Web (tracking e SEO local)
+
+- `VITE_GTM_ID` (opcional): Google Tag Manager ID (ex.: `GTM-XXXXXXX`)
+- `VITE_GA4_ID` (opcional): Google Analytics 4 ID (ex.: `G-XXXXXXXXXX`)
+- `VITE_GSC_VERIFICATION` (opcional): Google Search Console verification token
+
+### Web (chat)
+
+- `VITE_CHAT_ENABLED` (opcional): habilita o widget de chat (qualquer valor truthy)
+- `OPENAI_API_KEY` (server-side): usado por `apps/web/api/chat.ts`
+- `OPENAI_MODEL` (opcional): modelo (default: `gpt-4o-mini`)
+
 > Observação: a API de leads é um endpoint server-side (Vercel Function). Não exponha segredos no frontend.
 
 ### Desenvolvimento local
 
 - Em modo `DEV`, o formulário salva os envios em `localStorage` (`altiq:dev-leads`) para você validar a jornada sem backend.
+
+### Assets (hero)
+
+- Para habilitar vídeo no hero, adicione `apps/web/public/hero.mp4`.
 
 ## Deploy na Vercel
 

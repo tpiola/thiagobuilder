@@ -7,6 +7,7 @@ import { ModulePicker } from '@/components/ModulePicker';
 import { PricingBreakdown } from '@/components/PricingBreakdown';
 import { quoteTemplate } from '@/utils/pricing';
 import { BRAND } from '@/lib/brand';
+import { LeadCaptureSection } from '@/components/LeadCaptureSection';
 
 function slugify(input: string): string {
   return input
@@ -224,6 +225,14 @@ export default function TemplateBuilder() {
           </div>
         </div>
       </section>
+
+      <LeadCaptureSection
+        id="diagnostico"
+        source="template_builder"
+        headline="Quer transformar o draft em um sistema real?"
+        description="Solicite diagnóstico estratégico para validar arquitetura, escopo e automações antes de executar. Você recebe um plano objetivo com próximos passos."
+        intent="builder"
+      />
     </main>
   );
 }

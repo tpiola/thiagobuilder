@@ -28,12 +28,12 @@ export default function NotFound() {
         >
           Voltar para a Home
         </Link>
-        <a
-          href="/#lead"
+        <Link
+          to="/diagnostico"
           className="inline-flex h-12 items-center justify-center rounded-xl border border-black/15 px-6 text-sm font-semibold text-black/70 transition-colors hover:bg-black/5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black focus-visible:ring-offset-2"
         >
           Quero um diagnóstico
-        </a>
+        </Link>
       </div>
     </main>
   );

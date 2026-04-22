@@ -4,7 +4,19 @@ type SeoInput = {
   canonicalPath?: string;
   ogImage?: string;
   robots?: string;
+  jsonLd?: unknown;
 };
+
+export function applyJsonLd(id: string, json: unknown) {
+  const scriptId = `ld-json-${id}`;
+  const existing = document.getElementById(scriptId);
+  if (existing) existing.remove();
+  const el = document.createElement('script');
+  el.id = scriptId;
+  el.type = 'application/ld+json';
+  el.text = JSON.stringify(json);
+  document.head.appendChild(el);
+}
 
 function setMetaBy(name: string, value: string, content: string) {
   let el = document.querySelector(`meta[${name}="${value}"]`) as HTMLMetaElement | null;
@@ -19,6 +31,10 @@ function setMetaBy(name: string, value: string, content: string) {
 export function applySeo(input: SeoInput) {
   document.title = input.title;
   setMetaBy('name', 'description', input.description);
+
+  if (input.jsonLd) {
+    applyJsonLd('page', input.jsonLd);
+  }
 
   if (input.robots) {
     setMetaBy('name', 'robots', input.robots);
@@ -39,7 +55,7 @@ export function applySeo(input: SeoInput) {
   }
 
   const url = canonicalHref ?? window.location.href;
-  const ogImage = input.ogImage ?? 'https://altiq.ai/og-image.png';
+  const ogImage = input.ogImage ?? 'https://altiq.ai/og-image.svg';
 
   setMetaBy('property', 'og:type', 'website');
   setMetaBy('property', 'og:site_name', 'ALTIQ');

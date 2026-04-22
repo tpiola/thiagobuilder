@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { applySeo } from '@/lib/seo';
 import { RESOURCE_ITEMS, RESOURCES_INSPIRE } from '@/data/megaMenu';
+import { LeadCaptureSection } from '@/components/LeadCaptureSection';
 
 export default function Resources() {
   useEffect(() => {
@@ -60,6 +61,14 @@ export default function Resources() {
           </div>
         </div>
       </section>
+
+      <LeadCaptureSection
+        id="diagnostico"
+        source="footer"
+        headline="Quer transformar conhecimento em operação?"
+        description="Solicite um diagnóstico estratégico. A ALTIQ organiza a rota de execução, define a arquitetura mínima e conecta conteúdo, captura e automação."
+        intent="insights"
+      />
     </main>
   );
 }

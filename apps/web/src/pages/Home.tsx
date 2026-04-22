@@ -5,20 +5,29 @@ import { HeroVideo } from '@/components/HeroVideo';
 import { TemplateCard } from '@/components/TemplateCard';
 import { TEMPLATES } from '@/data/templates';
 import { LeadForm } from '@/components/LeadForm';
+import { Reveal } from '@/components/Reveal';
 import { BRAND } from '@/lib/brand';
 
 const STEPS = [
   {
-    t: '1 — Template por segmento',
-    d: 'Selecione uma base editorial premium com estrutura de conversão pronta.',
+    t: '1 — Diagnose',
+    d: 'Análise objetiva da operação, oferta e gargalos para definir a rota certa.',
   },
   {
-    t: '2 — Módulos operacionais',
-    d: 'Defina agendamento, automações, SEO e analytics conforme o escopo de entrega.',
+    t: '2 — Architect',
+    d: 'Arquitetura de páginas, navegação, copy e mensuração com padrão premium.',
   },
   {
-    t: '3 — Proposta e automação',
-    d: 'A captura direciona o lead e aciona automações via webhook com rastreio de origem.',
+    t: '3 — Build',
+    d: 'Implementação por módulos: experiência, captura, automação e governança.',
+  },
+  {
+    t: '4 — Activate',
+    d: 'Entrada, qualificação e resposta com n8n, UTM e rastreio do funil.',
+  },
+  {
+    t: '5 — Optimize',
+    d: 'Iteração orientada a métricas: performance, conversão e qualidade do lead.',
   },
 ] as const;
 
@@ -34,41 +43,71 @@ export default function Home() {
 
   return (
     <main className="bg-white">
-      <section className="relative isolate overflow-hidden bg-black" aria-labelledby="home-hero">
+      <section className="relative isolate overflow-hidden bg-[#090D12]" aria-labelledby="home-hero">
         <HeroVideo src={BRAND.heroVideoUrl} poster={BRAND.heroPosterUrl} />
-        <div className="relative mx-auto max-w-6xl px-6 pb-20 pt-28 md:pb-28 md:pt-32">
-          <div className="mx-auto max-w-3xl text-center">
-            <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-white/70">
-              Arquitetura de operações digitais
-            </p>
-            <h1 id="home-hero" className="mt-6 text-4xl font-semibold tracking-tight text-white md:text-6xl">
-              Um hub torna isso real.
-            </h1>
-            <p className="mx-auto mt-6 max-w-2xl text-base leading-relaxed text-white/75">
-              Você escolhe o nicho, o template e os módulos. A ALTIQ estrutura páginas, captação e automações para transformar intenção em operação.
-            </p>
+        <div className="relative mx-auto max-w-6xl px-6 pb-20 pt-28 md:pb-28 md:pt-36">
+          <div className="mx-auto max-w-4xl text-center">
+            <Reveal>
+              <p className="mx-auto inline-flex rounded-full border border-white/15 bg-white/5 px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.22em] text-white/75">
+                Premium AI-powered digital operations architecture platform
+              </p>
+            </Reveal>
+            <Reveal delay={0.06}>
+              <h1 id="home-hero" className="mt-6 text-4xl font-semibold tracking-tight text-white md:text-6xl">
+                Arquitetura digital com IA para marcas e operações que exigem alto padrão.
+              </h1>
+            </Reveal>
+            <Reveal delay={0.12}>
+              <p className="mx-auto mt-6 max-w-3xl text-base leading-relaxed text-white/75">
+                Construímos hubs, automações, ativos e sistemas de alta performance para transformar presença online em operação real.
+              </p>
+            </Reveal>
 
-            <div className="mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row">
-              <Link
-                to="/comecar"
-                className="inline-flex h-12 items-center justify-center rounded-xl bg-white px-8 text-xs font-semibold uppercase tracking-[0.18em] text-black transition-colors hover:bg-white/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-black"
-              >
-                Comece agora
-              </Link>
-              <Link
-                to="/templates"
-                className="inline-flex h-12 items-center justify-center rounded-xl border border-white/20 bg-white/5 px-8 text-xs font-semibold uppercase tracking-[0.18em] text-white transition-colors hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-black"
-              >
-                Ver templates
-              </Link>
-            </div>
+            <Reveal delay={0.18}>
+              <div className="mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row">
+                <Link
+                  to="/diagnostico"
+                  className="inline-flex h-12 items-center justify-center rounded-xl bg-white px-8 text-xs font-semibold uppercase tracking-[0.18em] text-black transition-colors hover:bg-white/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-black"
+                >
+                  Solicitar diagnóstico estratégico
+                </Link>
+                <Link
+                  to="/templates"
+                  className="inline-flex h-12 items-center justify-center rounded-xl border border-white/20 bg-white/5 px-8 text-xs font-semibold uppercase tracking-[0.18em] text-white transition-colors hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-black"
+                >
+                  Explorar a plataforma
+                </Link>
+              </div>
+            </Reveal>
+
+            <Reveal delay={0.24}>
+              <p className="mx-auto mt-8 max-w-2xl text-[11px] font-semibold uppercase tracking-[0.22em] text-white/55">
+                Estrutura, automação, autoridade e performance para operações digitais exigentes.
+              </p>
+            </Reveal>
+
+            <Reveal delay={0.3}>
+              <div className="mx-auto mt-8 grid max-w-4xl grid-cols-2 gap-3 text-left sm:grid-cols-4">
+                {[
+                  { k: 'A11y', v: 'WCAG-ready' },
+                  { k: 'SEO', v: 'Indexação limpa' },
+                  { k: 'Ops', v: 'n8n + Webhooks' },
+                  { k: 'Métricas', v: 'Eventos do funil' },
+                ].map((x) => (
+                  <div key={x.k} className="rounded-2xl border border-white/10 bg-white/5 p-4">
+                    <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-white/55">{x.k}</p>
+                    <p className="mt-2 text-sm font-semibold text-white/90">{x.v}</p>
+                  </div>
+                ))}
+              </div>
+            </Reveal>
           </div>
         </div>
       </section>
 
       <section className="border-t border-black/10 bg-white" aria-labelledby="hero-actions">
         <div className="mx-auto max-w-6xl px-6 py-10">
-          <div className="flex flex-col items-start justify-between gap-4 md:flex-row md:items-center">
+          <Reveal className="flex flex-col items-start justify-between gap-4 md:flex-row md:items-center">
             <div>
               <p className="text-xs font-semibold uppercase tracking-[0.18em] text-black/55">Atalhos</p>
               <h2 id="hero-actions" className="mt-2 text-xl font-semibold tracking-tight">
@@ -92,13 +131,13 @@ export default function Home() {
                 Abrir builder
               </Link>
             </div>
-          </div>
+          </Reveal>
         </div>
       </section>
 
       <section className="border-t border-black/10 bg-white" aria-labelledby="templates-home">
         <div className="mx-auto max-w-6xl px-6 py-12 md:py-16">
-          <div className="flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
+          <Reveal className="flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
             <div>
               <p className="text-xs font-semibold uppercase tracking-[0.18em] text-black/55">
                 Templates
@@ -116,7 +155,7 @@ export default function Home() {
             >
               Ver catálogo
             </Link>
-          </div>
+          </Reveal>
 
           <div className="mt-8 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
             {TEMPLATES.slice(0, 3).map((t) => (
@@ -128,10 +167,12 @@ export default function Home() {
 
       <section id="como-funciona" className="border-t border-black/10 bg-[#fafafa]" aria-label="Como funciona">
         <div className="mx-auto max-w-6xl px-6 py-12 md:py-16">
-          <p className="text-xs font-semibold uppercase tracking-[0.18em] text-black/55">
-            Método
-          </p>
-          <h2 className="mt-2 text-2xl font-semibold tracking-tight">Rápido, mensurável, escalável</h2>
+          <Reveal>
+            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-black/55">
+              Framework
+            </p>
+            <h2 className="mt-2 text-2xl font-semibold tracking-tight">Diagnose → Architect → Build → Activate → Optimize</h2>
+          </Reveal>
           <div className="mt-8 grid gap-4 sm:grid-cols-3">
             {STEPS.map((step) => (
               <div key={step.t} className="rounded-2xl border border-black/10 bg-white p-6">

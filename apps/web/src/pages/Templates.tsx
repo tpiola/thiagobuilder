@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { applySeo } from '@/lib/seo';
 import { TEMPLATES } from '@/data/templates';
 import { TemplateCard } from '@/components/TemplateCard';
+import { LeadCaptureSection } from '@/components/LeadCaptureSection';
 
 export default function Templates() {
   useEffect(() => {
@@ -36,7 +37,14 @@ export default function Templates() {
           ))}
         </div>
       </section>
+
+      <LeadCaptureSection
+        id="diagnostico"
+        source="template_catalog"
+        headline="Quer transformar este catálogo em um sistema operacional?"
+        description="Solicite um diagnóstico estratégico. Você recebe uma rota recomendada, escopo inicial e a estrutura mínima para capturar, qualificar e responder com previsibilidade."
+        intent="templates"
+      />
     </main>
   );
 }
-

@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from 'react';
 
 type HeroVideoProps = {
-  src: string;
+  src?: string;
   poster: string;
   className?: string;
 };
@@ -13,11 +13,42 @@ function prefersReducedMotion(): boolean {
 
 export function HeroVideo({ src, poster, className }: HeroVideoProps) {
   const [reduceMotion, setReduceMotion] = useState(false);
+  const [videoError, setVideoError] = useState(false);
+  const [videoReady, setVideoReady] = useState(false);
   const videoKey = useMemo(() => `${src}:${poster}`, [poster, src]);
 
   useEffect(() => {
     setReduceMotion(prefersReducedMotion());
   }, []);
+
+  useEffect(() => {
+    let cancelled = false;
+    setVideoReady(false);
+    setVideoError(false);
+
+    const url = typeof src === 'string' ? src : '';
+    if (!url || reduceMotion) return;
+
+    fetch(url, { method: 'HEAD' })
+      .then((r) => {
+        if (cancelled) return;
+        if (!r.ok) return;
+        const ct = r.headers.get('content-type') ?? '';
+        if (ct.startsWith('video/') || ct.startsWith('application/octet-stream')) {
+          setVideoReady(true);
+        }
+      })
+      .catch(() => {
+        if (cancelled) return;
+        setVideoError(true);
+      });
+
+    return () => {
+      cancelled = true;
+    };
+  }, [reduceMotion, src]);
+
+  const showVideo = Boolean(src) && !reduceMotion && videoReady && !videoError;
 
   return (
     <div className={className ?? 'absolute inset-0'} aria-hidden="true">
@@ -29,7 +60,7 @@ export function HeroVideo({ src, poster, className }: HeroVideoProps) {
         className="absolute inset-0 h-full w-full object-cover"
         loading="eager"
       />
-      {!reduceMotion && (
+      {showVideo && (
         <video
           key={videoKey}
           className="absolute inset-0 h-full w-full object-cover"
@@ -39,6 +70,7 @@ export function HeroVideo({ src, poster, className }: HeroVideoProps) {
           playsInline
           preload="metadata"
           poster={poster}
+          onError={() => setVideoError(true)}
         >
           <source src={src} type="video/mp4" />
         </video>
@@ -47,4 +79,3 @@ export function HeroVideo({ src, poster, className }: HeroVideoProps) {
     </div>
   );
 }
-

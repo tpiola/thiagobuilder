@@ -1,20 +1,35 @@
 import { useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { applySeo } from '@/lib/seo';
-import { findMenuPage } from '@/data/megaMenu';
+import { findMenuPage, routeForSlug } from '@/data/megaMenu';
+import { LeadCaptureSection } from '@/components/LeadCaptureSection';
 
-export default function MenuPage() {
+function normalizeInternalTo(to: string): string {
+  if (to.startsWith('/secao/')) {
+    const slug = to.replace('/secao/', '');
+    return routeForSlug(slug) ?? '/';
+  }
+  if (to.startsWith('/p/')) {
+    const slug = to.replace('/p/', '');
+    return routeForSlug(slug) ?? '/';
+  }
+  if (to === '/#lead' || to === '#lead') return '/diagnostico';
+  return to;
+}
+
+export default function MenuPage({ basePath }: { basePath?: string }) {
   const { slug } = useParams();
   const page = findMenuPage(slug);
+  const canonicalBase = basePath ?? '/produtos';
 
   useEffect(() => {
     if (!page) return;
     applySeo({
       title: `${page.title} — ALTIQ`,
       description: page.description,
-      canonicalPath: `/secao/${page.slug}`,
+      canonicalPath: `${canonicalBase}/${page.slug}`,
     });
-  }, [page]);
+  }, [canonicalBase, page]);
 
   if (!page) {
     return (
@@ -51,7 +66,7 @@ export default function MenuPage() {
 
           <div className="mt-8 flex flex-col gap-3 sm:flex-row">
             <Link
-              to={page.ctaTo}
+              to={normalizeInternalTo(page.ctaTo)}
               className="inline-flex h-12 items-center justify-center rounded-xl bg-black px-6 text-xs font-semibold uppercase tracking-[0.18em] text-white transition-colors hover:bg-black/85"
             >
               {page.ctaLabel}
@@ -78,13 +93,13 @@ export default function MenuPage() {
             </div>
             <div className="lg:col-span-5">
               <div className="overflow-hidden rounded-2xl border border-black/10">
-              <img
-                src={'https://images.unsplash.com/photo-1519710164239-da123dc03ef4?w=1600&h=900&fit=crop'}
-                alt=""
-                className="h-[220px] w-full object-cover"
-                loading="lazy"
-                decoding="async"
-              />
+                <img
+                  src={'/hero-slide-3.svg'}
+                  alt=""
+                  className="h-[220px] w-full object-cover"
+                  loading="lazy"
+                  decoding="async"
+                />
               </div>
             </div>
           </div>
@@ -104,6 +119,14 @@ export default function MenuPage() {
           ))}
         </div>
       </section>
+
+      <LeadCaptureSection
+        id="diagnostico"
+        source="footer"
+        headline="Quer transformar esta seção em operação?"
+        description="Solicite um diagnóstico estratégico. Você recebe a rota recomendada, a arquitetura mínima e a estrutura de automação para executar com padrão premium."
+        intent={`secao:${page.slug}`}
+      />
     </main>
   );
 }

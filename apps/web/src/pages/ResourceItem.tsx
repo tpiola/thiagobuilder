@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { applySeo } from '@/lib/seo';
 import { RESOURCE_ITEMS } from '@/data/megaMenu';
+import { LeadCaptureSection } from '@/components/LeadCaptureSection';
 
 export default function ResourceItem() {
   const { slug } = useParams();
@@ -13,7 +14,7 @@ export default function ResourceItem() {
       title: `${item.title} — Recursos ALTIQ`,
       description: item.description,
       canonicalPath: `/recursos/${item.slug}`,
-      ogImage: 'https://altiq.ai/og-image.png',
+      ogImage: 'https://altiq.ai/og-image.svg',
     });
   }, [item]);
 
@@ -89,9 +90,7 @@ export default function ResourceItem() {
             <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-white/45">Mídia</p>
             <div className="mt-6 overflow-hidden rounded-2xl border border-white/10 bg-white/5">
               <img
-                src={
-                  'https://images.unsplash.com/photo-1526481280695-3c687fd643ed?w=1200&h=900&fit=crop'
-                }
+                src={'/hero-slide-2.svg'}
                 alt=""
                 className="h-[320px] w-full object-cover"
                 loading="lazy"
@@ -101,6 +100,14 @@ export default function ResourceItem() {
           </div>
         </div>
       </section>
+
+      <LeadCaptureSection
+        id="diagnostico"
+        source="footer"
+        headline="Quer aplicar isso como sistema?"
+        description="Solicite diagnóstico estratégico. A ALTIQ traduz conteúdo em arquitetura, captura e automação com padrões mensuráveis."
+        intent={`recurso:${item.slug}`}
+      />
     </main>
   );
 }

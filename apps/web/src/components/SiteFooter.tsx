@@ -1,40 +1,9 @@
 import { Link } from 'react-router-dom';
 import { Facebook, Instagram, Linkedin, Twitter, Youtube } from 'lucide-react';
-import { FOOTER_GROUPS, RESOURCE_ITEMS, SOLUTION_CATEGORIES, findMenuPage } from '@/data/megaMenu';
 import { BRAND } from '@/lib/brand';
+import { ABOUT_ITEMS, INSIGHT_CATEGORIES, PLATFORM_ITEMS, SERVICE_ITEMS, SOLUTION_ITEMS, WORK_CASES } from '@/data/siteStructure';
 
 const YEAR = new Date().getFullYear();
-
-function resolveFooterLink(slug: string): { to: string; title: string } | null {
-  const page = findMenuPage(slug);
-  if (page) return { to: `/p/${page.slug}`, title: page.title };
-
-  const solution = SOLUTION_CATEGORIES.find((c) => c.slug === slug);
-  if (solution) return { to: `/solucoes/${solution.slug}`, title: solution.label };
-
-  const resource = RESOURCE_ITEMS.find((r) => r.slug === slug);
-  if (resource) return { to: `/recursos/${resource.slug}`, title: resource.title };
-
-  return null;
-}
-
-function FooterSectionLinks({ slugs }: { slugs: readonly string[] }) {
-  return (
-    <ul className="mt-5 grid gap-3">
-      {slugs.map((slug) => {
-        const link = resolveFooterLink(slug);
-        if (!link) return null;
-        return (
-          <li key={slug}>
-            <Link className="text-white/65 transition-colors hover:text-white" to={link.to}>
-              {link.title}
-            </Link>
-          </li>
-        );
-      })}
-    </ul>
-  );
-}
 
 const SOCIALS = [
   { label: 'Instagram', Icon: Instagram, href: '#' },
@@ -64,13 +33,93 @@ export function SiteFooter() {
             </p>
           </div>
 
-          <div className="grid gap-10 text-xs sm:grid-cols-2 lg:col-span-9 lg:grid-cols-5">
-            {FOOTER_GROUPS.map((group) => (
-              <div key={group.title}>
-                <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-white/45">{group.title}</p>
-                <FooterSectionLinks slugs={group.slugs} />
-              </div>
-            ))}
+          <div className="grid gap-10 text-xs sm:grid-cols-2 lg:col-span-9 lg:grid-cols-6">
+            <div>
+              <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-white/45">Platform</p>
+              <ul className="mt-5 grid gap-3">
+                {PLATFORM_ITEMS.map((i) => (
+                  <li key={i.slug}>
+                    <Link className="text-white/65 transition-colors hover:text-white" to={`/platform/${i.slug}`}>
+                      {i.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <div>
+              <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-white/45">Services</p>
+              <ul className="mt-5 grid gap-3">
+                {SERVICE_ITEMS.map((i) => (
+                  <li key={i.slug}>
+                    <Link className="text-white/65 transition-colors hover:text-white" to={`/services/${i.slug}`}>
+                      {i.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <div>
+              <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-white/45">Solutions</p>
+              <ul className="mt-5 grid gap-3">
+                {SOLUTION_ITEMS.map((i) => (
+                  <li key={i.slug}>
+                    <Link className="text-white/65 transition-colors hover:text-white" to={`/solucoes/${i.slug}`}>
+                      {i.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <div>
+              <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-white/45">Insights</p>
+              <ul className="mt-5 grid gap-3">
+                {INSIGHT_CATEGORIES.map((i) => (
+                  <li key={i.slug}>
+                    <Link className="text-white/65 transition-colors hover:text-white" to={`/insights/${i.slug}`}>
+                      {i.title}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <div>
+              <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-white/45">Empresa</p>
+              <ul className="mt-5 grid gap-3">
+                <li>
+                  <Link className="text-white/65 transition-colors hover:text-white" to="/about">
+                    About
+                  </Link>
+                </li>
+                {ABOUT_ITEMS.map((i) => (
+                  <li key={i.slug}>
+                    <Link className="text-white/65 transition-colors hover:text-white" to={`/about/${i.slug}`}>
+                      {i.label}
+                    </Link>
+                  </li>
+                ))}
+                <li>
+                  <Link className="text-white/65 transition-colors hover:text-white" to="/work">
+                    Work
+                  </Link>
+                </li>
+                {WORK_CASES.map((i) => (
+                  <li key={i.slug}>
+                    <Link className="text-white/65 transition-colors hover:text-white" to={`/work/${i.slug}`}>
+                      {i.title}
+                    </Link>
+                  </li>
+                ))}
+                <li>
+                  <Link className="text-white/65 transition-colors hover:text-white" to="/contato">
+                    Contact
+                  </Link>
+                </li>
+              </ul>
+            </div>
 
             <div>
               <div className="flex items-center justify-between">
@@ -129,13 +178,13 @@ export function SiteFooter() {
               <Link className="hover:text-white" to="/politica">
                 Privacidade
               </Link>
-              <Link className="hover:text-white" to="/p/preferencias-de-cookies">
+              <Link className="hover:text-white" to="/secao/preferencias-de-cookies">
                 Preferências de cookies
               </Link>
-              <Link className="hover:text-white" to="/p/medidas-de-seguranca">
+              <Link className="hover:text-white" to="/secao/medidas-de-seguranca">
                 Medidas de segurança
               </Link>
-              <Link className="hover:text-white" to="/p/mapa-do-site">
+              <Link className="hover:text-white" to="/secao/mapa-do-site">
                 Mapa do site
               </Link>
             </nav>

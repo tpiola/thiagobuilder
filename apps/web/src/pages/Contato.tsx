@@ -18,9 +18,11 @@ export default function Contato() {
           <p className="text-xs font-semibold uppercase tracking-[0.18em] text-black/55">
             Contato
           </p>
-          <h1 className="mt-3 text-3xl font-semibold tracking-tight md:text-4xl">Conecte-se com a ALTIQ</h1>
+          <h1 className="mt-3 text-3xl font-semibold tracking-tight md:text-4xl">
+            Vamos construir sua próxima estrutura digital.
+          </h1>
           <p className="mt-4 max-w-2xl text-sm leading-relaxed text-black/65">
-            Descreva seu nicho e objetivo. Você recebe uma proposta estruturada e um plano inicial de execução com foco em conversão e operação.
+            Este formulário é a porta de entrada premium. Envie contexto, objetivo e prazo. A ALTIQ retorna com diagnóstico estratégico e próximos passos.
           </p>
         </div>
       </section>
@@ -38,11 +40,12 @@ export default function Contato() {
           </div>
           <div className="md:col-span-6">
             <LeadForm
-              source="template_catalog"
-              title="Receber proposta"
-              description="Você desbloqueia o fluxo e recebe uma proposta baseada no seu nicho e escopo."
-              ctaLabel="Enviar e receber proposta"
-              context={{ intent: 'contato' }}
+              source="footer"
+              formVariant="full"
+              title="Solicitar diagnóstico estratégico"
+              description="Envie seus dados e contexto. Resposta em até 1 dia útil com rota recomendada, escopo e próximos passos."
+              ctaLabel="Enviar diagnóstico"
+              context={{ intent: 'contact' }}
             />
           </div>
         </div>

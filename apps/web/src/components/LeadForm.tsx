@@ -9,11 +9,30 @@ const Schema = z.object({
   name: z.string().trim().min(2).max(80).optional().or(z.literal('')),
   email: z.string().trim().min(3).max(160),
   phone: z.string().trim().min(8).max(40).optional().or(z.literal('')),
+  company: z.string().trim().min(2).max(120).optional().or(z.literal('')),
   city: z.string().trim().min(2).max(80).optional().or(z.literal('')),
   consent: z.boolean(),
 });
 
-type FormValues = z.infer<typeof Schema>;
+const FullSchema = Schema.extend({
+  objective: z.string().trim().min(2).max(120).optional().or(z.literal('')),
+  stage: z.string().trim().min(2).max(120).optional().or(z.literal('')),
+  timeline: z.string().trim().min(2).max(120).optional().or(z.literal('')),
+  message: z.string().trim().min(2).max(2000).optional().or(z.literal('')),
+});
+
+type FormValues = {
+  name?: string;
+  email: string;
+  phone?: string;
+  company?: string;
+  city?: string;
+  consent: boolean;
+  objective?: string;
+  stage?: string;
+  timeline?: string;
+  message?: string;
+};
 
 async function submitLead(
   payload: LeadPayload,
@@ -59,6 +78,7 @@ type LeadFormProps = {
   title?: string;
   description?: string;
   ctaLabel?: string;
+  formVariant?: 'compact' | 'full';
   context?: Record<string, unknown>;
   onSuccess?: () => void;
   className?: string;
@@ -70,6 +90,7 @@ export function LeadForm({
   description =
     'Você recebe um plano de ação com 3 alavancas de conversão e um roteiro de automação personalizado para o seu negócio.',
   ctaLabel = 'Quero meu diagnóstico grátis',
+  formVariant = 'compact',
   context,
   onSuccess,
   className,
@@ -97,7 +118,7 @@ export function LeadForm({
         setError(null);
         setStatus('sending');
 
-        const parsed = Schema.safeParse(values);
+        const parsed = (formVariant === 'full' ? FullSchema : Schema).safeParse(values);
         if (!parsed.success) {
           setStatus('error');
           setError('Confira os campos e tente novamente.');
@@ -113,12 +134,24 @@ export function LeadForm({
           email: parsed.data.email,
           name: parsed.data.name || undefined,
           phone: parsed.data.phone || undefined,
+          company: parsed.data.company || undefined,
           city: parsed.data.city || undefined,
           consent: parsed.data.consent,
           source,
-          variant,
+          variant: variant,
           utm,
-          context,
+          context: {
+            pagePath: window.location.pathname,
+            ...(formVariant === 'full'
+              ? {
+                  objective: (parsed.data as FormValues).objective || undefined,
+                  stage: (parsed.data as FormValues).stage || undefined,
+                  timeline: (parsed.data as FormValues).timeline || undefined,
+                  message: (parsed.data as FormValues).message || undefined,
+                }
+              : null),
+            ...(context ?? null),
+          },
         };
 
         const r = await submitLead(payload);
@@ -191,6 +224,20 @@ export function LeadForm({
         </div>
 
         <div>
+          <label className="text-xs font-semibold text-black/65" htmlFor="company">
+            Empresa / projeto
+          </label>
+          <div className="mt-2">
+            <Input
+              id="company"
+              autoComplete="organization"
+              placeholder="Nome da empresa ou projeto"
+              {...register('company')}
+            />
+          </div>
+        </div>
+
+        <div>
           <label className="text-xs font-semibold text-black/65" htmlFor="city">
             Cidade
           </label>
@@ -204,6 +251,61 @@ export function LeadForm({
           </div>
         </div>
       </div>
+
+      {formVariant === 'full' && (
+        <div className="mt-4 grid grid-cols-1 gap-4 md:grid-cols-2">
+          <div>
+            <label className="text-xs font-semibold text-black/65" htmlFor="objective">
+              Objetivo principal
+            </label>
+            <div className="mt-2">
+              <Input
+                id="objective"
+                placeholder="Ex.: aumentar leads, agendamentos, vendas"
+                {...register('objective')}
+              />
+            </div>
+          </div>
+          <div>
+            <label className="text-xs font-semibold text-black/65" htmlFor="stage">
+              Estágio atual
+            </label>
+            <div className="mt-2">
+              <Input
+                id="stage"
+                placeholder="Ex.: já vendo / validando / lançando"
+                {...register('stage')}
+              />
+            </div>
+          </div>
+          <div className="md:col-span-2">
+            <label className="text-xs font-semibold text-black/65" htmlFor="timeline">
+              Prazo
+            </label>
+            <div className="mt-2">
+              <Input
+                id="timeline"
+                placeholder="Ex.: 2 semanas / 30 dias / sem urgência"
+                {...register('timeline')}
+              />
+            </div>
+          </div>
+          <div className="md:col-span-2">
+            <label className="text-xs font-semibold text-black/65" htmlFor="message">
+              Mensagem
+            </label>
+            <div className="mt-2">
+              <textarea
+                id="message"
+                rows={4}
+                className="w-full rounded-xl border border-black/15 bg-white px-3 py-2 text-sm text-black placeholder:text-black/35 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black focus-visible:ring-offset-2"
+                placeholder="Contexto, oferta, público, links e qualquer detalhe relevante."
+                {...register('message')}
+              />
+            </div>
+          </div>
+        </div>
+      )}
 
       <div className="mt-5 flex items-start gap-3">
         <input

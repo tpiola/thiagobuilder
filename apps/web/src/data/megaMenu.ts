@@ -219,7 +219,7 @@ export const MENU_PAGES: MenuPage[] = [
     description: 'Organize ativos digitais e centralize o controle para ganhar velocidade operacional.',
     highlights: ['Governança', 'Organização', 'Velocidade'],
     ctaLabel: 'Ver funcionalidades',
-    ctaTo: '/secao/todas-as-funcionalidades',
+    ctaTo: '/produtos/todas-as-funcionalidades',
   },
   {
     slug: 'email-comercial',
@@ -238,7 +238,7 @@ export const MENU_PAGES: MenuPage[] = [
     description: 'Recursos avançados, escopo maior e suporte prioritário para operação em crescimento.',
     highlights: ['Execução avançada', 'Módulos completos', 'Prioridade'],
     ctaLabel: 'Solicitar proposta',
-    ctaTo: '/#lead',
+    ctaTo: '/diagnostico',
   },
   {
     slug: 'altiq-para-profissionais',
@@ -275,7 +275,7 @@ export const MENU_PAGES: MenuPage[] = [
     description: 'Escopo maior, priorização e infraestrutura para operações em crescimento.',
     highlights: ['Padrão premium', 'Execução acelerada', 'Governança'],
     ctaLabel: 'Solicitar proposta',
-    ctaTo: '/#lead',
+    ctaTo: '/diagnostico',
   },
   {
     slug: 'lista-de-recursos',
@@ -284,7 +284,25 @@ export const MENU_PAGES: MenuPage[] = [
     description: 'Visão geral do que existe no hub: páginas, módulos, captura, SEO e automações.',
     highlights: ['Mapa do sistema', 'Módulos do hub', 'Captura e automações'],
     ctaLabel: 'Ver funcionalidades',
-    ctaTo: '/secao/todas-as-funcionalidades',
+    ctaTo: '/produtos/todas-as-funcionalidades',
+  },
+  {
+    slug: 'gerador-de-nomes',
+    title: 'Gerador de nomes',
+    category: 'MARKETING',
+    description: 'Gere nomes claros e memoráveis para reforçar posicionamento e facilitar aquisição.',
+    highlights: ['Clareza', 'Memorabilidade', 'Consistência'],
+    ctaLabel: 'Solicitar diagnóstico',
+    ctaTo: '/diagnostico',
+  },
+  {
+    slug: 'criador-de-logotipos',
+    title: 'Criador de logotipos',
+    category: 'MARKETING',
+    description: 'Direção de identidade visual com hierarquia, contraste e aplicação consistente.',
+    highlights: ['Símbolo + wordmark', 'Aplicações', 'Legibilidade'],
+    ctaLabel: 'Solicitar diagnóstico',
+    ctaTo: '/diagnostico',
   },
   {
     slug: 'atualizacoes-de-produtos',
@@ -631,7 +649,7 @@ export const FOOTER_GROUPS: FooterGroup[] = [
     title: 'Produtos',
     slugs: [
       'sites-da-web',
-      'dominios',
+      'busca-de-dominio',
       'construtor-de-sites-com-ia',
       'inteligencia-de-design',
       'comercio-eletronico',
@@ -686,4 +704,28 @@ export const FOOTER_GROUPS: FooterGroup[] = [
     slugs: ['imprensa-e-midia', 'contate-nos', 'mapa-do-site'],
   },
 ];
+
+const COMPANY_SLUGS = new Set(FOOTER_GROUPS.find((g) => g.title === 'Empresa')?.slugs ?? []);
+const SUPPORT_SLUGS = new Set(FOOTER_GROUPS.find((g) => g.title === 'Apoiar')?.slugs ?? []);
+const RESOURCE_SLUGS = new Set([
+  ...(FOOTER_GROUPS.find((g) => g.title === 'Recursos')?.slugs ?? []),
+  ...Array.from(SUPPORT_SLUGS),
+]);
+
+export function routeForSlug(slug: string): string | null {
+  const solution = SOLUTION_CATEGORIES.find((c) => c.slug === slug);
+  if (solution) return `/solucoes/${solution.slug}`;
+
+  const resource = RESOURCE_ITEMS.find((r) => r.slug === slug);
+  if (resource) return `/recursos/${resource.slug}`;
+
+  const page = findMenuPage(slug);
+  if (page) {
+    if (COMPANY_SLUGS.has(slug)) return `/empresa/${slug}`;
+    if (RESOURCE_SLUGS.has(slug) || SUPPORT_SLUGS.has(slug)) return `/recursos/${slug}`;
+    return `/produtos/${slug}`;
+  }
+
+  return null;
+}
 

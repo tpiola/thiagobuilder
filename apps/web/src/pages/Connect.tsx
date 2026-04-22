@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { applySeo } from '@/lib/seo';
+import { LeadCaptureSection } from '@/components/LeadCaptureSection';
 
 type Provider = 'google' | 'apple' | 'facebook';
 
@@ -26,8 +27,9 @@ export default function Connect() {
   };
 
   return (
-    <main className="min-h-[calc(100vh-4rem)] bg-white">
-      <div className="mx-auto max-w-6xl px-6 pt-24">
+    <>
+      <main className="min-h-[calc(100vh-4rem)] bg-white">
+        <div className="mx-auto max-w-6xl px-6 pt-24">
         <div className="flex items-center justify-between text-xs">
           <Link to="/" className="inline-flex items-center gap-2 text-black/60 hover:text-black">
             <span aria-hidden="true">←</span>
@@ -142,7 +144,16 @@ export default function Connect() {
             </div>
           </div>
         </div>
-      </div>
-    </main>
+        </div>
+      </main>
+
+      <LeadCaptureSection
+        id="diagnostico"
+        source="footer"
+        headline="Prefere avançar direto para o diagnóstico?"
+        description="Se o objetivo é estrutura e execução, solicite um diagnóstico estratégico e receba os próximos passos com rota e escopo inicial."
+        intent="login"
+      />
+    </>
   );
 }
