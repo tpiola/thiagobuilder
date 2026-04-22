@@ -1,14 +1,5 @@
-type LeadBody = {
-  email?: unknown;
-  name?: unknown;
-  phone?: unknown;
-  company?: unknown;
-  city?: unknown;
-  source?: unknown;
-  variant?: unknown;
-  consent?: unknown;
-  utm?: unknown;
-};
+import { parseLeadPayload } from '@altiq/types';
+import { isEmail } from '@altiq/utils';
 
 type ApiRequest = {
   method?: string;
@@ -27,14 +18,6 @@ function json(res: ApiResponse, status: number, body: unknown) {
   res.end(JSON.stringify(body));
 }
 
-function isObject(value: unknown): value is Record<string, unknown> {
-  return typeof value === 'object' && value !== null;
-}
-
-function isEmail(value: string): boolean {
-  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value.trim());
-}
-
 export default async function handler(req: unknown, res: unknown) {
   const request = req as ApiRequest;
   const response = res as ApiResponse;
@@ -44,25 +27,11 @@ export default async function handler(req: unknown, res: unknown) {
     return json(response, 405, { ok: false, error: 'method_not_allowed' });
   }
 
-  const body: LeadBody = (request.body ?? {}) as LeadBody;
-  const email = typeof body?.email === 'string' ? body.email.trim() : '';
-  const consent = typeof body?.consent === 'boolean' ? body.consent : false;
+  const parsed = parseLeadPayload(request.body);
+  if (parsed.ok === false) return json(response, 400, { ok: false, error: parsed.error });
+  if (!isEmail(parsed.value.email)) return json(response, 400, { ok: false, error: 'invalid_email' });
 
-  if (!email || !isEmail(email)) return json(response, 400, { ok: false, error: 'invalid_email' });
-  if (!consent) return json(response, 400, { ok: false, error: 'consent_required' });
-
-  const payload = {
-    email,
-    name: typeof body?.name === 'string' ? body.name.trim() : undefined,
-    phone: typeof body?.phone === 'string' ? body.phone.trim() : undefined,
-    company: typeof body?.company === 'string' ? body.company.trim() : undefined,
-    city: typeof body?.city === 'string' ? body.city.trim() : undefined,
-    source: typeof body?.source === 'string' ? body.source : 'hero',
-    variant: typeof body?.variant === 'string' ? body.variant : 'A',
-    consent,
-    utm: isObject(body?.utm) ? body.utm : undefined,
-    receivedAt: new Date().toISOString(),
-  };
+  const payload = { ...parsed.value, receivedAt: new Date().toISOString() };
 
   const webhookUrl = process.env.LEAD_WEBHOOK_URL;
   if (!webhookUrl) return json(response, 500, { ok: false, error: 'missing_webhook' });
@@ -71,7 +40,7 @@ export default async function handler(req: unknown, res: unknown) {
   const headers: Record<string, string> = {
     'Content-Type': 'application/json',
   };
-  if (secret) headers['X-Althiq-Webhook-Secret'] = secret;
+  if (secret) headers['X-Altiq-Webhook-Secret'] = secret;
 
   const r = await fetch(webhookUrl, {
     method: 'POST',

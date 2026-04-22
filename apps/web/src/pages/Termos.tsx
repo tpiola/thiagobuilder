@@ -5,8 +5,8 @@ import { applySeo } from '@/lib/seo';
 export default function Termos() {
   useEffect(() => {
     applySeo({
-      title: 'Termos de Uso — ALTHIQ',
-      description: 'Condições de uso do site ALTHIQ e dos serviços de diagnóstico e automação.',
+      title: 'Termos de Uso — ALTIQ',
+      description: 'Condições de uso do site ALTIQ e dos serviços de diagnóstico e automação.',
       canonicalPath: '/termos',
     });
   }, []);
@@ -45,7 +45,7 @@ export default function Termos() {
             2. Serviços oferecidos
           </h2>
           <p className="mt-3">
-            A ALTHIQ oferece diagnóstico de conversão e automação para
+            A ALTIQ oferece diagnóstico de conversão e automação para
             negócios locais, além de proposta de implementação de sistema de aquisição de
             leads. O diagnóstico não implica qualquer contratação ou obrigação.
           </p>
@@ -57,7 +57,7 @@ export default function Termos() {
           </h2>
           <p className="mt-3">
             Todo o conteúdo deste site — textos, imagens, logotipos e código — é
-            propriedade da ALTHIQ. É proibida a reprodução sem autorização prévia
+            propriedade da ALTIQ. É proibida a reprodução sem autorização prévia
             por escrito.
           </p>
         </section>
@@ -68,7 +68,7 @@ export default function Termos() {
           </h2>
           <p className="mt-3">
             As informações e resultados apresentados são baseados em médias e estudos de
-            caso. Resultados individuais podem variar. A ALTHIQ não garante
+            caso. Resultados individuais podem variar. A ALTIQ não garante
             resultados específicos e não se responsabiliza por decisões tomadas com base
             no conteúdo do site.
           </p>

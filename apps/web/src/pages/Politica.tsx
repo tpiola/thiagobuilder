@@ -5,7 +5,7 @@ import { applySeo } from '@/lib/seo';
 export default function Politica() {
   useEffect(() => {
     applySeo({
-      title: 'Política de Privacidade — ALTHIQ',
+      title: 'Política de Privacidade — ALTIQ',
       description: 'Como tratamos seus dados pessoais e suas permissões de contato. LGPD.',
       canonicalPath: '/politica',
     });
@@ -69,8 +69,8 @@ export default function Politica() {
           <p className="mt-3">
             Você pode solicitar acesso, correção, portabilidade ou remoção dos seus dados
             a qualquer momento. Basta enviar um e-mail para{' '}
-            <a href="mailto:hello@althiq.com" className="underline hover:text-black">
-              hello@althiq.com
+            <a href="mailto:hello@altiq.com" className="underline hover:text-black">
+              hello@altiq.com
             </a>
             .
           </p>

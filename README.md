@@ -1,4 +1,4 @@
-# ALTHIQ — Monorepo
+# ALTIQ — Monorepo
 
 Monorepo white-label com foco em **conversão**, **SEO** e **WCAG AA**, composto por:
 
@@ -72,7 +72,7 @@ pnpm a11y
 
 ### Desenvolvimento local
 
-- Em modo `DEV`, o formulário salva os envios em `localStorage` (`althiq:dev-leads`) para você validar a jornada sem backend.
+- Em modo `DEV`, o formulário salva os envios em `localStorage` (`altiq:dev-leads`) para você validar a jornada sem backend.
 
 ## Deploy na Vercel
 

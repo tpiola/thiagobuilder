@@ -26,13 +26,13 @@ importers:
 
   apps/admin:
     dependencies:
-      '@althiq/types':
+      '@altiq/types':
         specifier: workspace:*
         version: link:../../packages/types
-      '@althiq/ui':
+      '@altiq/ui':
         specifier: workspace:*
         version: link:../../packages/ui
-      '@althiq/utils':
+      '@altiq/utils':
         specifier: workspace:*
         version: link:../../packages/utils
       clsx:
@@ -129,7 +129,7 @@ importers:
 
   apps/docs:
     dependencies:
-      '@althiq/ui':
+      '@altiq/ui':
         specifier: workspace:*
         version: link:../../packages/ui
       clsx:
@@ -238,13 +238,13 @@ importers:
 
   apps/web:
     dependencies:
-      '@althiq/types':
+      '@altiq/types':
         specifier: workspace:*
         version: link:../../packages/types
-      '@althiq/ui':
+      '@altiq/ui':
         specifier: workspace:*
         version: link:../../packages/ui
-      '@althiq/utils':
+      '@altiq/utils':
         specifier: workspace:*
         version: link:../../packages/utils
       clsx:
@@ -405,7 +405,7 @@ importers:
 
   packages/utils:
     dependencies:
-      '@althiq/types':
+      '@altiq/types':
         specifier: workspace:*
         version: link:../types
     devDependencies:

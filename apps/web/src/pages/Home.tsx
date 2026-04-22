@@ -1,90 +1,30 @@
 import { useEffect } from 'react';
-import { motion } from 'framer-motion';
-import { LeadForm } from '@/components/LeadForm';
+import { Link } from 'react-router-dom';
 import { applySeo } from '@/lib/seo';
+import { HeroCarousel } from '@/components/HeroCarousel';
+import { TemplateCard } from '@/components/TemplateCard';
+import { TEMPLATES } from '@/data/templates';
+import { LeadForm } from '@/components/LeadForm';
 
 const STEPS = [
-  { t: '1 — Oferta clara', d: 'Mensagem direta, sem ruído, que chega antes da concorrência.' },
-  { t: '2 — Prova social', d: 'Evidência rápida que reduz o medo e acelera a decisão.' },
-  { t: '3 — Ação imediata', d: 'Formulário curto e follow-up automático no mesmo minuto.' },
-] as const;
-
-const METRICS = [
-  { k: '+31%', v: 'aumento médio em conversões em páginas locais' },
-  { k: '−28%', v: 'redução no abandono no primeiro contato' },
-  { k: '<3 min', v: 'tempo para o lead receber a primeira resposta' },
-] as const;
-
-const TESTIMONIALS = [
   {
-    quote: 'Em 3 semanas a agenda encheu de verdade. Nunca imaginei que era tão simples quanto ter o sistema certo.',
-    author: 'Mariana T.',
-    role: 'Clínica Estética · Curitiba',
+    t: '1 — Template por nicho',
+    d: 'Escolha um layout editorial premium com estrutura de conversão pronta.',
   },
   {
-    quote: 'O formulário chegou antes do WhatsApp e o lead já estava nutrido quando eu liguei. Fechei na primeira ligação.',
-    author: 'Ricardo A.',
-    role: 'Consultório Odontológico · Londrina',
+    t: '2 — Módulos do hub',
+    d: 'Adicione agendamento, automações, SEO e analytics conforme o escopo.',
   },
   {
-    quote: 'Antes eu perdia lead por demora. Agora o sistema trabalha enquanto estou atendendo.',
-    author: 'Fernanda C.',
-    role: 'Personal Trainer · São Paulo',
+    t: '3 — Preço com lead',
+    d: 'Ao ver preço, você captura o lead e dispara as automações via webhook.',
   },
 ] as const;
-
-function MapSection() {
-  const address = 'Rua Exemplo, 123 - Centro';
-  const city = 'Curitiba - PR';
-  const query = encodeURIComponent(`${address}, ${city}`);
-  const mapsLink = `https://www.google.com/maps/search/?api=1&query=${query}`;
-  const iframeSrc = `https://www.google.com/maps?q=${query}&output=embed`;
-
-  return (
-    <section id="mapa" aria-labelledby="mapa-heading" className="border-t border-black/10 bg-white">
-      <div className="mx-auto grid max-w-6xl gap-10 px-6 py-20 md:grid-cols-2 md:items-start">
-        <div>
-          <p className="text-xs font-semibold uppercase tracking-[0.16em] text-black/60">Localização</p>
-          <h2 id="mapa-heading" className="mt-3 text-2xl font-semibold tracking-tight">
-            Abra no GPS e venha nos visitar
-          </h2>
-          <p className="mt-4 max-w-sm text-sm leading-relaxed text-black/65">
-            Conhecer o espaço antes de decidir aumenta a confiança e reduz o atrito na jornada de compra.
-          </p>
-          <div className="mt-7">
-            <a
-              className="inline-flex h-12 items-center justify-center rounded-xl bg-black px-6 text-sm font-semibold text-white transition-colors hover:bg-black/85 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black focus-visible:ring-offset-2"
-              href={mapsLink}
-              target="_blank"
-              rel="noreferrer"
-              aria-label="Abrir endereço no Google Maps"
-            >
-              Abrir no Google Maps
-            </a>
-          </div>
-          <p className="mt-5 text-xs text-black/60">
-            {address} — {city}
-          </p>
-        </div>
-        <div className="overflow-hidden rounded-2xl border border-black/10">
-          <iframe
-            title="Localização no Google Maps"
-            src={iframeSrc}
-            className="h-[320px] w-full"
-            loading="lazy"
-            referrerPolicy="no-referrer-when-downgrade"
-            aria-hidden="true"
-          />
-        </div>
-      </div>
-    </section>
-  );
-}
 
 export default function Home() {
   useEffect(() => {
     applySeo({
-      title: 'ALTHIQ — Arquitetura de Operações Digitais com IA',
+      title: 'ALTIQ — Arquitetura de Operações Digitais com IA',
       description:
         'Arquitetura de operações digitais com IA: hubs, sistemas e automações para lançar, captar, vender e escalar com execução premium.',
       canonicalPath: '/',
@@ -92,175 +32,125 @@ export default function Home() {
   }, []);
 
   return (
-    <main>
-      {/* Hero */}
-      <section
-        aria-labelledby="hero-heading"
-        className="relative overflow-hidden bg-white"
-      >
-        <div className="mx-auto grid max-w-6xl gap-16 px-6 py-20 md:grid-cols-12 md:items-center md:py-28">
-          <div className="md:col-span-7">
-            <motion.p
-              initial={{ opacity: 0, y: 8 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.4 }}
-              className="inline-flex rounded-full border border-black/12 bg-white px-4 py-2 text-xs font-semibold uppercase tracking-[0.16em] text-black/60"
-            >
-              Crescimento previsível para negócios locais
-            </motion.p>
+    <main className="bg-white">
+      <HeroCarousel
+        slides={[
+          {
+            src: 'https://coreva-normal.trae.ai/api/ide/v1/text_to_image?prompt=top%20navigation%20bar%20ui%2C%20minimal%20website%20header%2C%20high%20contrast%2C%20editorial%2C%20clean%20layout%2C%20cinematic%20lighting%2C%2035mm%2C%20soft%20film%20grain%2C%20realistic%20ui%20mockup&image_size=landscape_16_9',
+            alt: 'Menu superior fixo',
+          },
+          {
+            src: 'https://coreva-normal.trae.ai/api/ide/v1/text_to_image?prompt=website%20hero%20carousel%20banner%2C%20premium%20editorial%20layout%2C%20dark%20background%2C%20subtle%20gradient%2C%20clean%20typography%2C%20high%20end%20web%20design%2C%2035mm%2C%20soft%20grain&image_size=landscape_16_9',
+            alt: 'Carrossel no topo',
+          },
+          {
+            src: 'https://coreva-normal.trae.ai/api/ide/v1/text_to_image?prompt=responsive%20website%20layout%20on%20mobile%20tablet%20desktop%2C%20navigation%20and%20footer%20links%2C%20premium%20editorial%20design%2C%20clean%20grid%2C%20soft%20shadows%2C%20realistic%20device%20mockup&image_size=landscape_16_9',
+            alt: 'Responsivo em mobile, tablet e desktop',
+          },
+        ]}
+      />
 
-            <motion.h1
-              id="hero-heading"
-              initial={{ opacity: 0, y: 14 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.07 }}
-              className="mt-6 text-4xl font-semibold leading-[1.15] tracking-tight md:text-5xl"
-            >
-              Mais leads qualificados,{' '}
-              <br className="hidden md:block" />
-              mais agenda cheia —{' '}
-              <br className="hidden md:block" />
-              com IA e automação.
-            </motion.h1>
-
-            <motion.p
-              initial={{ opacity: 0, y: 14 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.14 }}
-              className="mt-6 max-w-xl text-base leading-relaxed text-black/65"
-            >
-              Você ganha uma jornada de compra enxuta: proposta clara, prova social,
-              fricção mínima e captura de lead conectada ao seu fluxo de nutrição.
-            </motion.p>
-
-            {/* Method steps */}
-            <motion.div
-              id="como-funciona"
-              initial={{ opacity: 0, y: 14 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.21 }}
-              className="mt-10 grid grid-cols-1 gap-3 sm:grid-cols-3"
-              aria-label="Como funciona"
-            >
-              {STEPS.map((step) => (
-                <div
-                  key={step.t}
-                  className="rounded-2xl border border-black/10 bg-white p-5 transition-shadow hover:shadow-md"
-                >
-                  <p className="text-xs font-semibold uppercase tracking-[0.14em] text-black/55">
-                    {step.t}
-                  </p>
-                  <p className="mt-2 text-sm leading-relaxed text-black/65">{step.d}</p>
-                </div>
-              ))}
-            </motion.div>
-          </div>
-
-          <div className="md:col-span-5" id="lead">
-            <LeadForm source="hero" />
+      <section className="border-t border-black/10 bg-white" aria-labelledby="hero-actions">
+        <div className="mx-auto max-w-6xl px-6 py-10">
+          <div className="flex flex-col items-start justify-between gap-4 md:flex-row md:items-center">
+            <div>
+              <p className="text-xs font-semibold uppercase tracking-[0.18em] text-black/55">Atalhos</p>
+              <h2 id="hero-actions" className="mt-2 text-xl font-semibold tracking-tight">
+                Navegue por páginas individuais (rotas próprias)
+              </h2>
+              <p className="mt-2 max-w-2xl text-sm leading-relaxed text-black/65">
+                A Home agora abre com carrossel. O menu fixo e o rodapé levam para as seções.
+              </p>
+            </div>
+            <div className="flex flex-col gap-3 sm:flex-row">
+              <Link
+                to="/templates"
+                className="inline-flex h-12 items-center justify-center rounded-xl bg-black px-8 text-xs font-semibold uppercase tracking-[0.18em] text-white transition-colors hover:bg-black/85 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black focus-visible:ring-offset-2"
+              >
+                Ver templates
+              </Link>
+              <Link
+                to="/builder"
+                className="inline-flex h-12 items-center justify-center rounded-xl border border-black/15 bg-white px-8 text-xs font-semibold uppercase tracking-[0.18em] text-black/80 transition-colors hover:bg-black/5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black focus-visible:ring-offset-2"
+              >
+                Abrir builder
+              </Link>
+            </div>
           </div>
         </div>
-
-        {/* Decorative gradient */}
-        <div
-          aria-hidden="true"
-          className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_20%_0%,rgba(0,0,0,0.05),transparent_55%),radial-gradient(ellipse_at_80%_0%,rgba(0,0,0,0.04),transparent_50%)]"
-        />
       </section>
 
-      {/* Social proof — numbers */}
-      <section
-        id="prova"
-        aria-labelledby="prova-heading"
-        className="border-t border-black/10 bg-[#fafafa]"
-      >
-        <div className="mx-auto max-w-6xl px-6 py-20">
-          <p className="text-xs font-semibold uppercase tracking-[0.16em] text-black/60">
-            Resultados
-          </p>
-          <h2
-            id="prova-heading"
-            className="mt-3 text-2xl font-semibold tracking-tight"
-          >
-            Números que tiram o risco da decisão
-          </h2>
-          <p className="mt-4 max-w-2xl text-sm leading-relaxed text-black/65">
-            A conversão sobe quando o cérebro entende rapidamente: isso funciona para pessoas como eu.
-          </p>
+      <section className="border-t border-black/10 bg-white" aria-labelledby="templates-home">
+        <div className="mx-auto max-w-6xl px-6 py-12 md:py-16">
+          <div className="flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
+            <div>
+              <p className="text-xs font-semibold uppercase tracking-[0.18em] text-black/55">
+                Templates
+              </p>
+              <h2 id="templates-home" className="mt-2 text-2xl font-semibold tracking-tight">
+                Escolha um template e direcione o clique de preço para lead
+              </h2>
+              <p className="mt-3 max-w-2xl text-sm leading-relaxed text-black/65">
+                Catálogo com visual editorial premium. O botão de preço abre a página do template com captura e webhook.
+              </p>
+            </div>
+            <Link
+              to="/templates"
+              className="inline-flex h-11 items-center justify-center rounded-xl bg-black px-6 text-xs font-semibold uppercase tracking-[0.18em] text-white transition-colors hover:bg-black/85 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black focus-visible:ring-offset-2"
+            >
+              Ver catálogo
+            </Link>
+          </div>
 
-          <div className="mt-10 grid gap-4 sm:grid-cols-3">
-            {METRICS.map((m) => (
-              <div
-                key={m.k}
-                className="rounded-2xl border border-black/10 bg-white p-7"
-              >
-                <p className="text-3xl font-semibold tracking-tight">{m.k}</p>
-                <p className="mt-2 text-sm leading-relaxed text-black/65">{m.v}</p>
+          <div className="mt-8 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+            {TEMPLATES.slice(0, 3).map((t) => (
+              <TemplateCard key={t.slug} template={t} />
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section id="como-funciona" className="border-t border-black/10 bg-[#fafafa]" aria-label="Como funciona">
+        <div className="mx-auto max-w-6xl px-6 py-12 md:py-16">
+          <p className="text-xs font-semibold uppercase tracking-[0.18em] text-black/55">
+            Método
+          </p>
+          <h2 className="mt-2 text-2xl font-semibold tracking-tight">Rápido, mensurável, escalável</h2>
+          <div className="mt-8 grid gap-4 sm:grid-cols-3">
+            {STEPS.map((step) => (
+              <div key={step.t} className="rounded-2xl border border-black/10 bg-white p-6">
+                <p className="text-xs font-semibold uppercase tracking-[0.18em] text-black/55">{step.t}</p>
+                <p className="mt-3 text-sm leading-relaxed text-black/65">{step.d}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Testimonials */}
-      <section
-        aria-labelledby="depoimentos-heading"
-        className="border-t border-black/10 bg-white"
-      >
-        <div className="mx-auto max-w-6xl px-6 py-20">
-          <p className="text-xs font-semibold uppercase tracking-[0.16em] text-black/60">
-            Depoimentos
-          </p>
-          <h2
-            id="depoimentos-heading"
-            className="mt-3 text-2xl font-semibold tracking-tight"
-          >
-            Quem já transformou o negócio
-          </h2>
-
-          <div className="mt-10 grid gap-5 md:grid-cols-3">
-            {TESTIMONIALS.map((t) => (
-              <figure
-                key={t.author}
-                className="rounded-2xl border border-black/10 bg-[#fafafa] p-7"
-              >
-                <blockquote className="text-sm leading-relaxed text-black/75">
-                  &ldquo;{t.quote}&rdquo;
-                </blockquote>
-                <figcaption className="mt-5 border-t border-black/8 pt-4">
-                  <p className="text-xs font-semibold text-black">{t.author}</p>
-                  <p className="mt-0.5 text-[11px] text-black/60">{t.role}</p>
-                </figcaption>
-              </figure>
-            ))}
+      <section id="lead" className="border-t border-black/10 bg-white" aria-labelledby="lead-heading">
+        <div className="mx-auto grid max-w-6xl gap-10 px-6 py-12 md:grid-cols-12 md:items-start md:py-16">
+          <div className="md:col-span-6">
+            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-black/55">
+              Diagnóstico
+            </p>
+            <h2 id="lead-heading" className="mt-2 text-2xl font-semibold tracking-tight">
+              Quer acelerar com a ALTIQ?
+            </h2>
+            <p className="mt-4 text-sm leading-relaxed text-black/65">
+              Se você prefere que a gente faça a arquitetura, entrega e automações, envie seus dados. O retorno vem com proposta e próximos passos.
+            </p>
+          </div>
+          <div className="md:col-span-6">
+            <LeadForm
+              source="hero"
+              title="Receber proposta e próximos passos"
+              description="Você entra no funil e recebe a proposta alinhada ao seu nicho, template e módulos."
+              ctaLabel="Quero falar com a ALTIQ"
+              context={{ intent: 'diagnostico' }}
+            />
           </div>
         </div>
       </section>
-
-      {/* CTA band */}
-      <section className="border-t border-black/10 bg-black">
-        <div className="mx-auto max-w-6xl px-6 py-16 text-center md:py-20">
-          <p className="text-xs font-semibold uppercase tracking-[0.16em] text-white/50">
-            Próximo passo
-          </p>
-          <h2 className="mt-3 text-2xl font-semibold tracking-tight text-white md:text-3xl">
-            Pronto para encher a agenda?
-          </h2>
-          <p className="mx-auto mt-4 max-w-md text-sm leading-relaxed text-white/60">
-            Receba em 2 minutos um diagnóstico com 3 alavancas de crescimento para o seu negócio local.
-          </p>
-          <div className="mt-8">
-            <a
-              href="#lead"
-              className="inline-flex h-12 items-center justify-center rounded-xl bg-white px-8 text-sm font-semibold text-black transition-colors hover:bg-white/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-black"
-            >
-              Quero meu diagnóstico gratuito
-            </a>
-          </div>
-        </div>
-      </section>
-
-      <MapSection />
     </main>
   );
 }

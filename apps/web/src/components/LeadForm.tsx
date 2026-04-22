@@ -1,9 +1,9 @@
 import { useMemo, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
-import type { LeadPayload, LeadSource } from '@althiq/types';
-import { assignAbVariant, getOrCreateVisitorId, isEmail, pickUtm } from '@althiq/utils';
-import { Button, Input } from '@althiq/ui';
+import type { LeadPayload, LeadSource } from '@altiq/types';
+import { assignAbVariant, getOrCreateVisitorId, isEmail, pickUtm } from '@altiq/utils';
+import { Button, Input } from '@altiq/ui';
 
 const Schema = z.object({
   name: z.string().trim().min(2).max(80).optional().or(z.literal('')),
@@ -19,7 +19,7 @@ async function submitLead(
   payload: LeadPayload,
 ): Promise<{ ok: true } | { ok: false; error: string }> {
   if (import.meta.env.DEV) {
-    const key = 'althiq:dev-leads';
+    const key = 'altiq:dev-leads';
     const raw = window.localStorage.getItem(key);
     let list: unknown[] = [];
     try {
@@ -54,7 +54,26 @@ async function submitLead(
   }
 }
 
-export function LeadForm({ source }: { source: LeadSource }) {
+type LeadFormProps = {
+  source: LeadSource;
+  title?: string;
+  description?: string;
+  ctaLabel?: string;
+  context?: Record<string, unknown>;
+  onSuccess?: () => void;
+  className?: string;
+};
+
+export function LeadForm({
+  source,
+  title = 'Diagnóstico gratuito (2 minutos)',
+  description =
+    'Você recebe um plano de ação com 3 alavancas de conversão e um roteiro de automação personalizado para o seu negócio.',
+  ctaLabel = 'Quero meu diagnóstico grátis',
+  context,
+  onSuccess,
+  className,
+}: LeadFormProps) {
   const [status, setStatus] = useState<'idle' | 'sending' | 'sent' | 'error'>('idle');
   const [error, setError] = useState<string | null>(null);
 
@@ -70,7 +89,10 @@ export function LeadForm({ source }: { source: LeadSource }) {
 
   return (
     <form
-      className="rounded-2xl border border-black/10 bg-white p-6 shadow-lg shadow-black/5 md:p-8"
+      className={
+        className ??
+        'rounded-2xl border border-black/10 bg-white p-6 shadow-lg shadow-black/5 md:p-8'
+      }
       onSubmit={handleSubmit(async (values) => {
         setError(null);
         setStatus('sending');
@@ -96,11 +118,13 @@ export function LeadForm({ source }: { source: LeadSource }) {
           source,
           variant,
           utm,
+          context,
         };
 
         const r = await submitLead(payload);
         if (r.ok) {
           setStatus('sent');
+          onSuccess?.();
           return;
         }
         setStatus('error');
@@ -109,12 +133,9 @@ export function LeadForm({ source }: { source: LeadSource }) {
       aria-describedby={error ? 'lead-error' : undefined}
     >
       <div>
-        <h2 className="text-xl font-semibold tracking-tight">
-          Diagnóstico gratuito (2 minutos)
-        </h2>
+        <h2 className="text-xl font-semibold tracking-tight">{title}</h2>
         <p className="mt-2 text-sm leading-relaxed text-black/65">
-          Você recebe um plano de ação com 3 alavancas de conversão e um roteiro de
-          automação personalizado para o seu negócio local.
+          {description}
         </p>
       </div>
 
@@ -226,7 +247,7 @@ export function LeadForm({ source }: { source: LeadSource }) {
             ? '✓ Enviado — confira seu e-mail'
             : status === 'sending'
               ? 'Enviando…'
-              : 'Quero meu diagnóstico grátis'}
+              : ctaLabel}
         </Button>
         <p className="text-[11px] text-black/60">
           Sem spam. Cancele a qualquer momento.

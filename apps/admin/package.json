@@ -12,9 +12,9 @@
     "test": "vitest run"
   },
   "dependencies": {
-    "@althiq/types": "workspace:*",
-    "@althiq/ui": "workspace:*",
-    "@althiq/utils": "workspace:*",
+    "@altiq/types": "workspace:*",
+    "@altiq/ui": "workspace:*",
+    "@altiq/utils": "workspace:*",
     "clsx": "^2.1.1",
     "framer-motion": "^10.18.0",
     "lucide-react": "^0.511.0",
