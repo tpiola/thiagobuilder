@@ -16,6 +16,7 @@ import Termos from '@/pages/Termos';
 import { SiteHeader } from '@/components/SiteHeader';
 import { SiteFooter } from '@/components/SiteFooter';
 import { CookieConsent } from '@/components/CookieConsent';
+import { WhatsAppFab } from '@/components/WhatsAppFab';
 
 export default function App() {
   return (
@@ -42,6 +43,7 @@ export default function App() {
       </div>
       <SiteFooter />
       <CookieConsent />
+      <WhatsAppFab />
     </Router>
   );
 }

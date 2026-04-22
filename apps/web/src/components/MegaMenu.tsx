@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import { Instagram, Linkedin, Youtube } from 'lucide-react';
 import { cn } from '@altiq/ui';
 import { MEGA_MENU, RESOURCE_ITEMS, RESOURCES_INSPIRE, SOLUTION_CATEGORIES, findMenuPage } from '@/data/megaMenu';
 
@@ -280,6 +281,28 @@ export function MegaMenu({ variant }: MegaMenuProps) {
         >
           Conecte-se
         </Link>
+
+        <div className="hidden items-center gap-2 lg:flex" aria-label="Redes sociais">
+          {[
+            { label: 'Instagram', Icon: Instagram, href: '#' },
+            { label: 'YouTube', Icon: Youtube, href: '#' },
+            { label: 'LinkedIn', Icon: Linkedin, href: '#' },
+          ].map(({ href, label, Icon }) => (
+            <a
+              key={label}
+              href={href}
+              aria-label={label}
+              className={cn(
+                'inline-flex h-9 w-9 items-center justify-center rounded-xl border transition-colors',
+                variant === 'overlay'
+                  ? 'border-white/10 bg-white/5 text-white/70 hover:bg-white/10 hover:text-white'
+                  : 'border-black/10 bg-black/2 text-black/65 hover:bg-black/5 hover:text-black',
+              )}
+            >
+              <Icon size={16} />
+            </a>
+          ))}
+        </div>
 
         <Link
           to="/comecar"
