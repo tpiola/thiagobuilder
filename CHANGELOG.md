@@ -19,3 +19,4 @@
 - Expandida a arquitetura do site: `/platform`, `/services`, `/work`, `/about`, `/insights` e subpáginas.
 - Adicionada camada de tracking (GTM/GA4/GSC via env) e chat demonstrativo (`/api/chat`).
 - Ajustados testes e2e para refletir o novo hero e CTAs.
+- Hero em vídeo local (`/hero.mp4`) e remoção de pré-checagem via `fetch` para evitar `ERR_ABORTED` no console.
