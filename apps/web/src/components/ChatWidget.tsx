@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
 import { cn } from '@altiq/ui';
+import { useTts } from '@/hooks/useTts';
 
 type ChatMessage = {
   role: 'user' | 'assistant';
@@ -9,9 +10,11 @@ type ChatMessage = {
 
 export function ChatWidget({ className }: { className?: string }) {
   const reduce = useReducedMotion();
+  const { supported: ttsSupported, speaking, speak, stop } = useTts();
   const [open, setOpen] = useState(false);
   const [busy, setBusy] = useState(false);
   const [input, setInput] = useState('');
+  const [audioOn, setAudioOn] = useState(false);
   const [messages, setMessages] = useState<ChatMessage[]>([
     {
       role: 'assistant',
@@ -46,6 +49,7 @@ export function ChatWidget({ className }: { className?: string }) {
       const data = (await r.json()) as { ok?: boolean; text?: string };
       const reply = data?.ok && typeof data.text === 'string' ? data.text : 'No momento, não consegui responder. Tente novamente.';
       setMessages((m) => [...m, { role: 'assistant', text: reply }]);
+      if (audioOn && ttsSupported) speak(reply);
     } catch {
       setMessages((m) => [...m, { role: 'assistant', text: 'Falha de conexão. Tente novamente em instantes.' }]);
     } finally {
@@ -73,14 +77,32 @@ export function ChatWidget({ className }: { className?: string }) {
                 <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-white/55">ALTIQ Assistant</p>
                 <p className="mt-1 text-sm font-semibold text-white/90">Diagnóstico rápido</p>
               </div>
-              <button
-                type="button"
-                onClick={() => setOpen(false)}
-                className="inline-flex h-9 w-9 items-center justify-center rounded-xl border border-white/10 bg-white/5 text-white/80 hover:bg-white/10"
-                aria-label="Fechar"
-              >
-                ×
-              </button>
+              <div className="flex items-center gap-2">
+                <button
+                  type="button"
+                  disabled={!ttsSupported}
+                  onClick={() => {
+                    if (!ttsSupported) return;
+                    if (speaking) {
+                      stop();
+                      return;
+                    }
+                    setAudioOn((v) => !v);
+                  }}
+                  className="inline-flex h-9 items-center justify-center rounded-xl border border-white/10 bg-white/5 px-3 text-[11px] font-semibold uppercase tracking-[0.18em] text-white/80 hover:bg-white/10 disabled:opacity-60"
+                  aria-label="Alternar áudio"
+                >
+                  Áudio
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setOpen(false)}
+                  className="inline-flex h-9 w-9 items-center justify-center rounded-xl border border-white/10 bg-white/5 text-white/80 hover:bg-white/10"
+                  aria-label="Fechar"
+                >
+                  ×
+                </button>
+              </div>
             </div>
 
             <div ref={listRef} className="max-h-[340px] space-y-3 overflow-auto px-5 py-4">
@@ -140,4 +162,3 @@ export function ChatWidget({ className }: { className?: string }) {
     </div>
   );
 }
-

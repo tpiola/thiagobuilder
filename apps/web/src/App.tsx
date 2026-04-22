@@ -29,6 +29,7 @@ import { SiteFooter } from '@/components/SiteFooter';
 import { CookieConsent } from '@/components/CookieConsent';
 import { WhatsAppFab } from '@/components/WhatsAppFab';
 import { ChatWidget } from '@/components/ChatWidget';
+import { VoiceAssistant } from '@/components/VoiceAssistant';
 import { initTracking, trackPageView } from '@/lib/analytics';
 
 function LegacySectionRedirect() {
@@ -95,6 +96,7 @@ export default function App() {
       <CookieConsent />
       <WhatsAppFab />
       <ChatWidget />
+      <VoiceAssistant />
     </Router>
   );
 }

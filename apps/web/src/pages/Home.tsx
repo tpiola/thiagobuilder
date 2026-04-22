@@ -1,5 +1,5 @@
-import { useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { useEffect, useMemo, useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import { applySeo } from '@/lib/seo';
 import { HeroVideo } from '@/components/HeroVideo';
 import { TemplateCard } from '@/components/TemplateCard';
@@ -32,6 +32,14 @@ const STEPS = [
 ] as const;
 
 export default function Home() {
+  const navigate = useNavigate();
+  const [topic, setTopic] = useState('');
+
+  const startHref = useMemo(() => {
+    const q = topic.trim();
+    return q ? `/comecar?topic=${encodeURIComponent(q)}` : '/comecar';
+  }, [topic]);
+
   useEffect(() => {
     applySeo({
       title: 'ALTIQ — Arquitetura de Operações Digitais com IA',
@@ -49,12 +57,12 @@ export default function Home() {
           <div className="mx-auto max-w-4xl text-center">
             <Reveal>
               <p className="mx-auto inline-flex rounded-full border border-white/15 bg-white/5 px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.22em] text-white/75">
-                Premium AI-powered digital operations architecture platform
+                Plataforma de arquitetura digital com IA
               </p>
             </Reveal>
             <Reveal delay={0.06}>
               <h1 id="home-hero" className="mt-6 text-4xl font-semibold tracking-tight text-white md:text-6xl">
-                Arquitetura digital com IA para marcas e operações que exigem alto padrão.
+                Arquitetura digital com IA para operar em <span className="altiq-serif">alto nível</span>.
               </h1>
             </Reveal>
             <Reveal delay={0.12}>
@@ -69,13 +77,13 @@ export default function Home() {
                   to="/diagnostico"
                   className="inline-flex h-12 items-center justify-center rounded-xl bg-white px-8 text-xs font-semibold uppercase tracking-[0.18em] text-black transition-colors hover:bg-white/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-black"
                 >
-                  Solicitar diagnóstico estratégico
+                  Solicitar diagnóstico <span className="altiq-arrow">→</span>
                 </Link>
                 <Link
                   to="/templates"
                   className="inline-flex h-12 items-center justify-center rounded-xl border border-white/20 bg-white/5 px-8 text-xs font-semibold uppercase tracking-[0.18em] text-white transition-colors hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-black"
                 >
-                  Explorar a plataforma
+                  Explorar a plataforma <span className="altiq-arrow">→</span>
                 </Link>
               </div>
             </Reveal>
@@ -100,6 +108,42 @@ export default function Home() {
                   </div>
                 ))}
               </div>
+            </Reveal>
+
+            <Reveal delay={0.36}>
+              <form
+                className="mx-auto mt-10 max-w-3xl rounded-3xl border border-white/10 bg-black/60 p-4 shadow-2xl shadow-black/50 backdrop-blur"
+                onSubmit={(e) => {
+                  e.preventDefault();
+                  navigate(startHref);
+                }}
+              >
+                <div className="grid gap-3 md:grid-cols-12 md:items-center">
+                  <div className="md:col-span-8">
+                    <label className="sr-only" htmlFor="topic">
+                      Nicho
+                    </label>
+                    <input
+                      id="topic"
+                      value={topic}
+                      onChange={(e) => setTopic(e.target.value)}
+                      placeholder="Digite seu nicho (ex.: Design de Interiores, Marcenaria)"
+                      className="h-12 w-full rounded-2xl border border-white/15 bg-white/5 px-4 text-sm text-white outline-none placeholder:text-white/45 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-black"
+                    />
+                  </div>
+                  <div className="md:col-span-4">
+                    <button
+                      type="submit"
+                      className="inline-flex h-12 w-full items-center justify-center rounded-2xl bg-white px-6 text-xs font-semibold uppercase tracking-[0.18em] text-black transition-colors hover:bg-white/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-black"
+                    >
+                      Gerar proposta <span className="altiq-arrow">→</span>
+                    </button>
+                  </div>
+                </div>
+                <p className="mt-3 text-center text-[11px] font-semibold uppercase tracking-[0.22em] text-white/45">
+                  Escolha o nicho • selecione módulos • veja o valor • capture lead
+                </p>
+              </form>
             </Reveal>
           </div>
         </div>

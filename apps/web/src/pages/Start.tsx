@@ -44,6 +44,12 @@ export default function Start() {
     });
   }, []);
 
+  useEffect(() => {
+    const qp = new URLSearchParams(window.location.search);
+    const seed = qp.get('topic');
+    if (seed && seed.trim().length >= 2) setTopic(seed.trim());
+  }, []);
+
   const progressPct = useMemo(() => {
     const i = stepIndex(step);
     return Math.round(((i + 1) / STEPS.length) * 100);

@@ -15,7 +15,7 @@ export default function PlatformItem() {
   useEffect(() => {
     if (!item) return;
     applySeo({
-      title: `${item.label} — Platform — ALTIQ`,
+      title: `${item.label} — Plataforma — ALTIQ`,
       description: item.description,
       canonicalPath: `/platform/${item.slug}`,
     });
@@ -42,7 +42,7 @@ export default function PlatformItem() {
         <div className="relative mx-auto max-w-6xl px-6 pb-14 pt-28 md:pb-16 md:pt-36">
           <div className="max-w-3xl">
             <Reveal>
-              <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-white/60">Platform</p>
+              <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-white/60">Plataforma</p>
             </Reveal>
             <Reveal delay={0.06}>
               <h1 id="platform-item-hero" className="mt-3 text-4xl font-semibold tracking-tight text-white md:text-5xl">
@@ -88,4 +88,3 @@ export default function PlatformItem() {
     </main>
   );
 }
-

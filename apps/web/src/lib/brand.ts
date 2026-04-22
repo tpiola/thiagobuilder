@@ -3,6 +3,8 @@ export const BRAND = {
   domain: 'altiq.ai',
   email: 'hello@altiq.com',
   webhookSecretHeader: 'X-Altiq-Webhook-Secret',
-  heroVideoUrl: '/hero.mp4',
+  heroVideoUrl: 'https://cdn.coverr.co/videos/coverr-working-at-night-5178/1080p.mp4',
   heroPosterUrl: '/hero-slide-1.svg',
+  baseCity: 'Franca / SP',
+  mapsQuery: 'Franca SP',
 } as const;

@@ -29,6 +29,38 @@
 
   /* Prevent layout shift from scrollbar */
   scrollbar-gutter: stable;
+
+  --altiq-serif:
+    ui-serif,
+    'Iowan Old Style',
+    'Palatino Linotype',
+    Palatino,
+    Garamond,
+    Georgia,
+    serif;
+}
+
+.altiq-serif {
+  font-family: var(--altiq-serif);
+  letter-spacing: -0.02em;
+}
+
+.altiq-arrow {
+  font-family: var(--altiq-serif);
+  letter-spacing: -0.06em;
+}
+
+.altiq-underline {
+  background-image: linear-gradient(currentColor, currentColor);
+  background-repeat: no-repeat;
+  background-size: 0% 1px;
+  background-position: 0 100%;
+  transition: background-size 320ms cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.altiq-underline:hover,
+.altiq-underline:focus-visible {
+  background-size: 100% 1px;
 }
 
 /* ─── Focus styles ─── */

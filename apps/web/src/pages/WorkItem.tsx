@@ -14,7 +14,7 @@ export default function WorkItem() {
   useEffect(() => {
     if (!item) return;
     applySeo({
-      title: `${item.title} — Work — ALTIQ`,
+      title: `${item.title} — Cases — ALTIQ`,
       description: item.description,
       canonicalPath: `/work/${item.slug}`,
     });
@@ -41,7 +41,7 @@ export default function WorkItem() {
         <div className="relative mx-auto max-w-6xl px-6 pb-14 pt-28 md:pb-16 md:pt-36">
           <div className="max-w-3xl">
             <Reveal>
-              <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-white/60">Work</p>
+              <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-white/60">Cases</p>
             </Reveal>
             <Reveal delay={0.06}>
               <h1 id="work-item-hero" className="mt-3 text-4xl font-semibold tracking-tight text-white md:text-5xl">
@@ -83,4 +83,3 @@ export default function WorkItem() {
     </main>
   );
 }
-

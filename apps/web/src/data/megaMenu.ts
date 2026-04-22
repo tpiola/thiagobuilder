@@ -513,7 +513,7 @@ export const SOLUTION_CATEGORIES: SolutionCategory[] = [
     description:
       'Transforme projetos pessoais em projetos remunerados. Estruture oferta, portfólio, captação e follow-up com clareza e velocidade.',
     chips: ['Fotógrafos', 'Designers de Interiores', 'Designers gráficos', 'Arquitetos', 'Artistas', 'Moda e Vestuário'],
-    imageUrl: 'https://images.unsplash.com/photo-1531297484001-80022131f5a1?w=1200&h=1400&fit=crop',
+    imageUrl: 'https://images.unsplash.com/photo-1531297484001-80022131f5a1?auto=format&fit=crop&w=1600&h=2000&q=80',
   },
   {
     slug: 'servicos-profissionais',
@@ -522,7 +522,7 @@ export const SOLUTION_CATEGORIES: SolutionCategory[] = [
     description:
       'Página de serviço com narrativa e prova, proposta clara e CTA com captura inteligente. Feito para vender com autoridade sem ruído.',
     chips: ['Advocacia', 'Consultorias', 'Clínicas', 'Contabilidade', 'B2B', 'Especialistas'],
-    imageUrl: 'https://images.unsplash.com/photo-1556155092-490a1ba16284?w=1200&h=1400&fit=crop',
+    imageUrl: 'https://images.unsplash.com/photo-1556155092-490a1ba16284?auto=format&fit=crop&w=1600&h=2000&q=80',
   },
   {
     slug: 'educacao-e-treinamento',
@@ -531,7 +531,7 @@ export const SOLUTION_CATEGORIES: SolutionCategory[] = [
     description:
       'Do conteúdo ao produto: páginas de curso, calendário, área de membros e automações de onboarding para ativar e reter.',
     chips: ['Cursos', 'Mentorias', 'Escolas', 'Programas', 'Comunidades', 'Certificações'],
-    imageUrl: 'https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=1200&h=1400&fit=crop',
+    imageUrl: 'https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=1600&h=2000&q=80',
   },
   {
     slug: 'beleza',
@@ -540,7 +540,7 @@ export const SOLUTION_CATEGORIES: SolutionCategory[] = [
     description:
       'Agendamento, prova e estética. Um sistema que reduz no-show e transforma intenção em reserva com comunicação rápida.',
     chips: ['Salões', 'Estética', 'Barbearias', 'Clínicas', 'Spa', 'Terapias'],
-    imageUrl: 'https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=1200&h=1400&fit=crop',
+    imageUrl: 'https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?auto=format&fit=crop&w=1600&h=2000&q=80',
   },
   {
     slug: 'esportes-e-fitness',
@@ -549,7 +549,7 @@ export const SOLUTION_CATEGORIES: SolutionCategory[] = [
     description:
       'Oferta clara, rotina e recorrência. Landing + conteúdo + acompanhamento para converter e manter retenção.',
     chips: ['Personal', 'Academias', 'Estúdios', 'Pilates', 'Corrida', 'Nutrição'],
-    imageUrl: 'https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=1200&h=1400&fit=crop',
+    imageUrl: 'https://images.unsplash.com/photo-1517836357463-d25dfeac3438?auto=format&fit=crop&w=1600&h=2000&q=80',
   },
   {
     slug: 'saude-e-bem-estar',
@@ -558,7 +558,7 @@ export const SOLUTION_CATEGORIES: SolutionCategory[] = [
     description:
       'Confiança e clareza. Páginas com linguagem precisa, fricção mínima e captura que respeita o contexto.',
     chips: ['Odonto', 'Fisio', 'Psicologia', 'Medicina', 'Nutrição', 'Clínicas'],
-    imageUrl: 'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=1200&h=1400&fit=crop',
+    imageUrl: 'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=1600&h=2000&q=80',
   },
   {
     slug: 'servicos-domiciliares',
@@ -567,7 +567,7 @@ export const SOLUTION_CATEGORIES: SolutionCategory[] = [
     description:
       'Captação com prova e velocidade. Páginas enxutas com CTA direto e automações para resposta imediata.',
     chips: ['Reformas', 'Assistência', 'Limpeza', 'Instalações', 'Manutenção', 'Serviços'],
-    imageUrl: 'https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?w=1200&h=1400&fit=crop',
+    imageUrl: 'https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=1600&h=2000&q=80',
   },
   {
     slug: 'eventos-e-experiencias',
@@ -576,7 +576,7 @@ export const SOLUTION_CATEGORIES: SolutionCategory[] = [
     description:
       'Do anúncio à confirmação. Estruture páginas de evento, captura, pagamento e follow-up sem dispersão.',
     chips: ['Workshops', 'Retreats', 'Shows', 'Cerimônias', 'Ingressos', 'Experiências'],
-    imageUrl: 'https://images.unsplash.com/photo-1515165562835-c3b8b5b7f5df?w=1200&h=1400&fit=crop',
+    imageUrl: 'https://images.unsplash.com/photo-1515165562835-c3b8b5b7f5df?auto=format&fit=crop&w=1600&h=2000&q=80',
   },
   {
     slug: 'organizacoes',
@@ -585,7 +585,7 @@ export const SOLUTION_CATEGORIES: SolutionCategory[] = [
     description:
       'Doação com confiança: narrativa, transparência e funil simples. Medição e automações para recorrência.',
     chips: ['ONGs', 'Institutos', 'Projetos', 'Campanhas', 'Doações', 'Impacto'],
-    imageUrl: 'https://images.unsplash.com/photo-1520975916090-3105956dac38?w=1200&h=1400&fit=crop',
+    imageUrl: 'https://images.unsplash.com/photo-1520975916090-3105956dac38?auto=format&fit=crop&w=1600&h=2000&q=80',
   },
   {
     slug: 'pessoal',
@@ -594,7 +594,7 @@ export const SOLUTION_CATEGORIES: SolutionCategory[] = [
     description:
       'Uma presença simples, precisa e bonita. Portfólio, bio e contato com acabamento premium.',
     chips: ['Bio sites', 'Portfólio', 'Links', 'One-page', 'Autoridade', 'Contato'],
-    imageUrl: 'https://images.unsplash.com/photo-1526481280695-3c687fd643ed?w=1200&h=1400&fit=crop',
+    imageUrl: 'https://images.unsplash.com/photo-1526481280695-3c687fd643ed?auto=format&fit=crop&w=1600&h=2000&q=80',
   },
 ];
 
@@ -635,7 +635,7 @@ export const RESOURCE_ITEMS: ResourceItem[] = [
 export const RESOURCES_INSPIRE = {
   title: 'Feito com ALTIQ',
   description: 'Uma coleção de templates e hubs inspiradores criados para operações reais.',
-  mediaUrl: 'https://images.unsplash.com/photo-1526481280695-3c687fd643ed?w=1200&h=800&fit=crop',
+  mediaUrl: 'https://images.unsplash.com/photo-1526481280695-3c687fd643ed?auto=format&fit=crop&w=2400&h=1350&q=80',
   to: '/templates',
 } as const;
 

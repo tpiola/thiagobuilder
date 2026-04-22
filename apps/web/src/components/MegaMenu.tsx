@@ -3,6 +3,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { Instagram, Linkedin, Youtube } from 'lucide-react';
 import { cn } from '@altiq/ui';
 import { INSIGHT_CATEGORIES, PLATFORM_ITEMS, SERVICE_ITEMS, SOLUTION_ITEMS } from '@/data/siteStructure';
+import { trackEvent } from '@/lib/analytics';
 
 type MegaMenuProps = {
   variant: 'overlay' | 'solid';
@@ -11,6 +12,23 @@ type MegaMenuProps = {
 type ActiveMenu = 'platform' | 'services' | 'solutions' | 'insights' | null;
 
 type SolutionSlug = (typeof SOLUTION_ITEMS)[number]['slug'];
+
+const SOCIALS = [
+  { label: 'Instagram', Icon: Instagram, env: 'VITE_SOCIAL_INSTAGRAM' },
+  { label: 'YouTube', Icon: Youtube, env: 'VITE_SOCIAL_YOUTUBE' },
+  { label: 'LinkedIn', Icon: Linkedin, env: 'VITE_SOCIAL_LINKEDIN' },
+] as const;
+
+function getSocialHref(key: (typeof SOCIALS)[number]['env']): string | undefined {
+  switch (key) {
+    case 'VITE_SOCIAL_INSTAGRAM':
+      return import.meta.env.VITE_SOCIAL_INSTAGRAM;
+    case 'VITE_SOCIAL_YOUTUBE':
+      return import.meta.env.VITE_SOCIAL_YOUTUBE;
+    case 'VITE_SOCIAL_LINKEDIN':
+      return import.meta.env.VITE_SOCIAL_LINKEDIN;
+  }
+}
 
 function chipClassName(active = false) {
   return cn(
@@ -206,7 +224,7 @@ export function MegaMenu({ variant }: MegaMenuProps) {
   const triggerBase = useMemo(
     () =>
       cn(
-        'inline-flex items-center gap-2 py-2 text-[11px] font-semibold uppercase tracking-[0.22em] transition-colors',
+        'altiq-underline inline-flex items-center gap-2 py-2 text-[11px] font-semibold uppercase tracking-[0.22em] transition-colors',
         variant === 'overlay' ? 'text-white/85 hover:text-white' : 'text-black/65 hover:text-black',
       ),
     [variant],
@@ -227,7 +245,7 @@ export function MegaMenu({ variant }: MegaMenuProps) {
           onFocus={() => setActive('platform')}
           onClick={() => setActive((s) => (s === 'platform' ? null : 'platform'))}
         >
-          Platform
+          Plataforma
           <span className={cn('transition-transform', active === 'platform' ? 'rotate-180' : '')}>▾</span>
         </button>
 
@@ -241,7 +259,7 @@ export function MegaMenu({ variant }: MegaMenuProps) {
           onFocus={() => setActive('services')}
           onClick={() => setActive((s) => (s === 'services' ? null : 'services'))}
         >
-          Services
+          Serviços
           <span className={cn('transition-transform', active === 'services' ? 'rotate-180' : '')}>▾</span>
         </button>
 
@@ -255,7 +273,7 @@ export function MegaMenu({ variant }: MegaMenuProps) {
           onFocus={() => setActive('solutions')}
           onClick={() => setActive((s) => (s === 'solutions' ? null : 'solutions'))}
         >
-          Solutions
+          Soluções
           <span className={cn('transition-transform', active === 'solutions' ? 'rotate-180' : '')}>▾</span>
         </button>
 
@@ -280,7 +298,7 @@ export function MegaMenu({ variant }: MegaMenuProps) {
             variant === 'overlay' ? 'text-white/85 hover:text-white' : 'text-black/65 hover:text-black',
           )}
         >
-          Work
+          Cases
         </Link>
 
         <Link
@@ -290,7 +308,7 @@ export function MegaMenu({ variant }: MegaMenuProps) {
             variant === 'overlay' ? 'text-white/85 hover:text-white' : 'text-black/65 hover:text-black',
           )}
         >
-          About
+          Sobre
         </Link>
 
         <Link
@@ -304,25 +322,28 @@ export function MegaMenu({ variant }: MegaMenuProps) {
         </Link>
 
         <div className="hidden items-center gap-2 lg:flex" aria-label="Redes sociais">
-          {[
-            { label: 'Instagram', Icon: Instagram, href: '#' },
-            { label: 'YouTube', Icon: Youtube, href: '#' },
-            { label: 'LinkedIn', Icon: Linkedin, href: '#' },
-          ].map(({ href, label, Icon }) => (
-            <a
-              key={label}
-              href={href}
-              aria-label={label}
-              className={cn(
-                'inline-flex h-9 w-9 items-center justify-center rounded-xl border transition-colors',
-                variant === 'overlay'
-                  ? 'border-white/10 bg-white/5 text-white/70 hover:bg-white/10 hover:text-white'
-                  : 'border-black/10 bg-black/2 text-black/65 hover:bg-black/5 hover:text-black',
-              )}
-            >
-              <Icon size={16} />
-            </a>
-          ))}
+          {SOCIALS.map(({ env, label, Icon }) => {
+            const href = getSocialHref(env);
+            if (!href) return null;
+            return (
+              <a
+                key={label}
+                href={href}
+                target="_blank"
+                rel="noreferrer"
+                aria-label={label}
+                onClick={() => trackEvent('social_click', { network: label, location: 'header' })}
+                className={cn(
+                  'inline-flex h-9 w-9 items-center justify-center rounded-xl border transition-colors',
+                  variant === 'overlay'
+                    ? 'border-white/10 bg-white/5 text-white/70 hover:bg-white/10 hover:text-white'
+                    : 'border-black/10 bg-black/2 text-black/65 hover:bg-black/5 hover:text-black',
+                )}
+              >
+                <Icon size={16} />
+              </a>
+            );
+          })}
         </div>
 
         <Link
@@ -346,7 +367,7 @@ export function MegaMenu({ variant }: MegaMenuProps) {
               <div className="mx-auto max-w-6xl overflow-hidden rounded-3xl border border-white/10 bg-black/95 shadow-2xl shadow-black/50">
                 <div className="grid gap-10 px-8 py-8 lg:grid-cols-12">
                   <div className="grid gap-10 lg:col-span-9 lg:grid-cols-3">
-                    <SectionColumn title="Platform" items={PLATFORM_ITEMS} to={(s) => `/platform/${s}`} />
+                    <SectionColumn title="Plataforma" items={PLATFORM_ITEMS} to={(s) => `/platform/${s}`} />
                     <div>
                       <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-white/45">Atalhos</p>
                       <ul className="mt-4 grid gap-3">
@@ -380,7 +401,7 @@ export function MegaMenu({ variant }: MegaMenuProps) {
               <div className="mx-auto max-w-6xl overflow-hidden rounded-3xl border border-white/10 bg-black/95 shadow-2xl shadow-black/50">
                 <div className="grid gap-10 px-8 py-8 lg:grid-cols-12">
                   <div className="grid gap-10 lg:col-span-9 lg:grid-cols-3">
-                    <SectionColumn title="Services" items={SERVICE_ITEMS} to={(s) => `/services/${s}`} />
+                    <SectionColumn title="Serviços" items={SERVICE_ITEMS} to={(s) => `/services/${s}`} />
                     <div className="rounded-2xl border border-white/10 bg-white/5 p-6">
                       <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-white/45">Padrão de entrega</p>
                       <ul className="mt-4 grid gap-2 text-xs text-white/70">

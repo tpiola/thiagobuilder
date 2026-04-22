@@ -33,7 +33,7 @@ export default function AboutItem() {
   useEffect(() => {
     if (!item) return;
     applySeo({
-      title: `${item.label} — About — ALTIQ`,
+      title: `${item.label} — Sobre — ALTIQ`,
       description: item.description,
       canonicalPath: `/about/${item.slug}`,
     });
@@ -60,7 +60,7 @@ export default function AboutItem() {
         <div className="relative mx-auto max-w-6xl px-6 pb-14 pt-28 md:pb-16 md:pt-36">
           <div className="max-w-3xl">
             <Reveal>
-              <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-white/60">About</p>
+              <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-white/60">Sobre</p>
             </Reveal>
             <Reveal delay={0.06}>
               <h1 id="about-item-hero" className="mt-3 text-4xl font-semibold tracking-tight text-white md:text-5xl">
@@ -96,4 +96,3 @@ export default function AboutItem() {
     </main>
   );
 }
-

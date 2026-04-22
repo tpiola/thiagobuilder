@@ -98,7 +98,7 @@ export function SiteHeader() {
                   )
                 }
               >
-                Platform
+                Plataforma
               </NavLink>
               <NavLink
                 to="/services"
@@ -109,7 +109,7 @@ export function SiteHeader() {
                   )
                 }
               >
-                Services
+                Serviços
               </NavLink>
               <NavLink
                 to="/solucoes"
@@ -131,7 +131,7 @@ export function SiteHeader() {
                   )
                 }
               >
-                Work
+                Cases
               </NavLink>
               <NavLink
                 to="/about"
@@ -142,7 +142,7 @@ export function SiteHeader() {
                   )
                 }
               >
-                About
+                Sobre
               </NavLink>
               <NavLink
                 to="/insights"

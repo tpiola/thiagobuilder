@@ -10,7 +10,7 @@ import { ABOUT_ITEMS } from '@/data/siteStructure';
 export default function About() {
   useEffect(() => {
     applySeo({
-      title: 'About — ALTIQ',
+      title: 'Sobre — ALTIQ',
       description: 'Profundidade institucional, legitimidade e coerência.',
       canonicalPath: '/about',
     });
@@ -23,7 +23,7 @@ export default function About() {
         <div className="relative mx-auto max-w-6xl px-6 pb-16 pt-28 md:pb-20 md:pt-36">
           <div className="max-w-3xl">
             <Reveal>
-              <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-white/60">About</p>
+              <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-white/60">Sobre</p>
             </Reveal>
             <Reveal delay={0.06}>
               <h1 id="about-hero" className="mt-3 text-4xl font-semibold tracking-tight text-white md:text-5xl">
@@ -68,4 +68,3 @@ export default function About() {
     </main>
   );
 }
-
