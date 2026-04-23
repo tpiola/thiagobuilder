@@ -90,10 +90,6 @@ pnpm a11y
 
 - Para habilitar vídeo no hero, adicione `apps/web/public/hero.mp4`.
 
-## Integrações
-
-- Detalhes de n8n / WhatsApp Cloud API / tracking / chat: `docs/INTEGRATIONS.md`
-
 ## Deploy na Vercel
 
 Este repositório está pronto para deploy no Vercel.

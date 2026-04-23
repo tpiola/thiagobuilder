@@ -635,7 +635,7 @@ export const RESOURCE_ITEMS: ResourceItem[] = [
 export const RESOURCES_INSPIRE = {
   title: 'Feito com ALTIQ',
   description: 'Uma coleção de templates e hubs inspiradores criados para operações reais.',
-  mediaUrl: '/hero-slide-2.svg',
+  mediaUrl: 'https://images.unsplash.com/photo-1526481280695-3c687fd643ed?auto=format&fit=crop&w=2400&h=1350&q=80',
   to: '/templates',
 } as const;
 

@@ -20,6 +20,3 @@
 - Adicionada camada de tracking (GTM/GA4/GSC via env) e chat demonstrativo (`/api/chat`).
 - Ajustados testes e2e para refletir o novo hero e CTAs.
 - Hero em vídeo local (`/hero.mp4`) e remoção de pré-checagem via `fetch` para evitar `ERR_ABORTED` no console.
-- Rodapé com Google Maps embed e CTA “Abrir no GPS” (placeholder por `mapsQuery`).
-- Links sociais com tracking (`social_click`) via env vars e integração opcional de voz/TTS.
-- Templates de workflows n8n versionados em `n8n/workflows/` + documentação em `docs/INTEGRATIONS.md`.

@@ -2,33 +2,16 @@ import { Link } from 'react-router-dom';
 import { Facebook, Instagram, Linkedin, Twitter, Youtube } from 'lucide-react';
 import { BRAND } from '@/lib/brand';
 import { ABOUT_ITEMS, INSIGHT_CATEGORIES, PLATFORM_ITEMS, SERVICE_ITEMS, SOLUTION_ITEMS, WORK_CASES } from '@/data/siteStructure';
-import { MapEmbed } from '@/components/MapEmbed';
-import { trackEvent } from '@/lib/analytics';
 
 const YEAR = new Date().getFullYear();
 
 const SOCIALS = [
-  { label: 'Instagram', Icon: Instagram, env: 'VITE_SOCIAL_INSTAGRAM' },
-  { label: 'YouTube', Icon: Youtube, env: 'VITE_SOCIAL_YOUTUBE' },
-  { label: 'LinkedIn', Icon: Linkedin, env: 'VITE_SOCIAL_LINKEDIN' },
-  { label: 'Facebook', Icon: Facebook, env: 'VITE_SOCIAL_FACEBOOK' },
-  { label: 'X', Icon: Twitter, env: 'VITE_SOCIAL_X' },
+  { label: 'Instagram', Icon: Instagram, href: '#' },
+  { label: 'YouTube', Icon: Youtube, href: '#' },
+  { label: 'LinkedIn', Icon: Linkedin, href: '#' },
+  { label: 'Facebook', Icon: Facebook, href: '#' },
+  { label: 'X', Icon: Twitter, href: '#' },
 ] as const;
-
-function getSocialHref(key: (typeof SOCIALS)[number]['env']): string | undefined {
-  switch (key) {
-    case 'VITE_SOCIAL_INSTAGRAM':
-      return import.meta.env.VITE_SOCIAL_INSTAGRAM;
-    case 'VITE_SOCIAL_YOUTUBE':
-      return import.meta.env.VITE_SOCIAL_YOUTUBE;
-    case 'VITE_SOCIAL_LINKEDIN':
-      return import.meta.env.VITE_SOCIAL_LINKEDIN;
-    case 'VITE_SOCIAL_FACEBOOK':
-      return import.meta.env.VITE_SOCIAL_FACEBOOK;
-    case 'VITE_SOCIAL_X':
-      return import.meta.env.VITE_SOCIAL_X;
-  }
-}
 
 export function SiteFooter() {
   return (
@@ -52,7 +35,7 @@ export function SiteFooter() {
 
           <div className="grid gap-10 text-xs sm:grid-cols-2 lg:col-span-9 lg:grid-cols-6">
             <div>
-              <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-white/45">Plataforma</p>
+              <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-white/45">Platform</p>
               <ul className="mt-5 grid gap-3">
                 {PLATFORM_ITEMS.map((i) => (
                   <li key={i.slug}>
@@ -65,7 +48,7 @@ export function SiteFooter() {
             </div>
 
             <div>
-              <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-white/45">Serviços</p>
+              <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-white/45">Services</p>
               <ul className="mt-5 grid gap-3">
                 {SERVICE_ITEMS.map((i) => (
                   <li key={i.slug}>
@@ -78,7 +61,7 @@ export function SiteFooter() {
             </div>
 
             <div>
-              <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-white/45">Soluções</p>
+              <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-white/45">Solutions</p>
               <ul className="mt-5 grid gap-3">
                 {SOLUTION_ITEMS.map((i) => (
                   <li key={i.slug}>
@@ -108,7 +91,7 @@ export function SiteFooter() {
               <ul className="mt-5 grid gap-3">
                 <li>
                   <Link className="text-white/65 transition-colors hover:text-white" to="/about">
-                    Sobre
+                    About
                   </Link>
                 </li>
                 {ABOUT_ITEMS.map((i) => (
@@ -120,7 +103,7 @@ export function SiteFooter() {
                 ))}
                 <li>
                   <Link className="text-white/65 transition-colors hover:text-white" to="/work">
-                    Cases
+                    Work
                   </Link>
                 </li>
                 {WORK_CASES.map((i) => (
@@ -132,7 +115,7 @@ export function SiteFooter() {
                 ))}
                 <li>
                   <Link className="text-white/65 transition-colors hover:text-white" to="/contato">
-                    Contato
+                    Contact
                   </Link>
                 </li>
               </ul>
@@ -145,7 +128,7 @@ export function SiteFooter() {
               <ul className="mt-5 grid gap-3">
                 <li>
                   <Link className="text-white/65 transition-colors hover:text-white" to="/conecte-se">
-                    Acessar
+                    Login
                   </Link>
                 </li>
                 <li>
@@ -162,27 +145,16 @@ export function SiteFooter() {
 
               <p className="mt-10 text-[11px] font-semibold uppercase tracking-[0.22em] text-white/45">Seguir</p>
               <div className="mt-5 flex flex-wrap gap-2">
-                {SOCIALS.map(({ env, label, Icon }) => {
-                  const href = getSocialHref(env);
-                  if (!href) return null;
-                  return (
-                    <a
-                      key={label}
-                      href={href}
-                      target="_blank"
-                      rel="noreferrer"
-                      aria-label={label}
-                      className="inline-flex h-9 w-9 items-center justify-center rounded-xl border border-white/10 bg-white/5 text-white/70 transition-colors hover:bg-white/10 hover:text-white"
-                      onClick={() => trackEvent('social_click', { network: label, location: 'footer' })}
-                    >
-                      <Icon size={16} />
-                    </a>
-                  );
-                })}
-              </div>
-
-              <div className="mt-10">
-                <MapEmbed />
+                {SOCIALS.map(({ href, label, Icon }) => (
+                  <a
+                    key={label}
+                    href={href}
+                    aria-label={label}
+                    className="inline-flex h-9 w-9 items-center justify-center rounded-xl border border-white/10 bg-white/5 text-white/70 transition-colors hover:bg-white/10 hover:text-white"
+                  >
+                    <Icon size={16} />
+                  </a>
+                ))}
               </div>
             </div>
           </div>

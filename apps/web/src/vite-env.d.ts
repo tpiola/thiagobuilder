@@ -17,10 +17,6 @@ declare global {
     readonly VITE_SOCIAL_FACEBOOK?: string;
     readonly VITE_SOCIAL_X?: string;
   }
-
-interface ImportMeta {
-  readonly env: ImportMetaEnv;
-}
 }
 
 export {};

@@ -3,7 +3,6 @@ import { Link, useLocation } from 'react-router-dom';
 import { Instagram, Linkedin, Youtube } from 'lucide-react';
 import { cn } from '@altiq/ui';
 import { INSIGHT_CATEGORIES, PLATFORM_ITEMS, SERVICE_ITEMS, SOLUTION_ITEMS } from '@/data/siteStructure';
-import { trackEvent } from '@/lib/analytics';
 
 type MegaMenuProps = {
   variant: 'overlay' | 'solid';
@@ -12,23 +11,6 @@ type MegaMenuProps = {
 type ActiveMenu = 'platform' | 'services' | 'solutions' | 'insights' | null;
 
 type SolutionSlug = (typeof SOLUTION_ITEMS)[number]['slug'];
-
-const SOCIALS = [
-  { label: 'Instagram', Icon: Instagram, env: 'VITE_SOCIAL_INSTAGRAM' },
-  { label: 'YouTube', Icon: Youtube, env: 'VITE_SOCIAL_YOUTUBE' },
-  { label: 'LinkedIn', Icon: Linkedin, env: 'VITE_SOCIAL_LINKEDIN' },
-] as const;
-
-function getSocialHref(key: (typeof SOCIALS)[number]['env']): string | undefined {
-  switch (key) {
-    case 'VITE_SOCIAL_INSTAGRAM':
-      return import.meta.env.VITE_SOCIAL_INSTAGRAM;
-    case 'VITE_SOCIAL_YOUTUBE':
-      return import.meta.env.VITE_SOCIAL_YOUTUBE;
-    case 'VITE_SOCIAL_LINKEDIN':
-      return import.meta.env.VITE_SOCIAL_LINKEDIN;
-  }
-}
 
 function chipClassName(active = false) {
   return cn(
@@ -322,28 +304,25 @@ export function MegaMenu({ variant }: MegaMenuProps) {
         </Link>
 
         <div className="hidden items-center gap-2 lg:flex" aria-label="Redes sociais">
-          {SOCIALS.map(({ env, label, Icon }) => {
-            const href = getSocialHref(env);
-            if (!href) return null;
-            return (
-              <a
-                key={label}
-                href={href}
-                target="_blank"
-                rel="noreferrer"
-                aria-label={label}
-                onClick={() => trackEvent('social_click', { network: label, location: 'header' })}
-                className={cn(
-                  'inline-flex h-9 w-9 items-center justify-center rounded-xl border transition-colors',
-                  variant === 'overlay'
-                    ? 'border-white/10 bg-white/5 text-white/70 hover:bg-white/10 hover:text-white'
-                    : 'border-black/10 bg-black/2 text-black/65 hover:bg-black/5 hover:text-black',
-                )}
-              >
-                <Icon size={16} />
-              </a>
-            );
-          })}
+          {[
+            { label: 'Instagram', Icon: Instagram, href: '#' },
+            { label: 'YouTube', Icon: Youtube, href: '#' },
+            { label: 'LinkedIn', Icon: Linkedin, href: '#' },
+          ].map(({ href, label, Icon }) => (
+            <a
+              key={label}
+              href={href}
+              aria-label={label}
+              className={cn(
+                'inline-flex h-9 w-9 items-center justify-center rounded-xl border transition-colors',
+                variant === 'overlay'
+                  ? 'border-white/10 bg-white/5 text-white/70 hover:bg-white/10 hover:text-white'
+                  : 'border-black/10 bg-black/2 text-black/65 hover:bg-black/5 hover:text-black',
+              )}
+            >
+              <Icon size={16} />
+            </a>
+          ))}
         </div>
 
         <Link
